@@ -1,0 +1,87 @@
+\documentclass[uplatex,dvipdfmx]{jsarticle}
+
+\input{"preamble.tex"}
+
+\title{微分幾何(数学3)まとめ}
+\author{ガオゾウ}
+
+\begin{document}
+\maketitle
+\section*{曲面の微分幾何}
+第一基本形式は計量に相当し、次のように定義される。
+\begin{equation}
+    I = (d\vec{r})^2 = Edu^2 + 2Fdudv + G dv^2    \label{eq:metric}
+\end{equation}
+第二基本形式は曲面の曲がり具合を表す。具体的には、面の法線方向の変化量である。
+\begin{align}
+    II &:= -d\vec{e}\cdot d\vec{r} = \vec{e}\cdot dd\vec{r} \\ \nonumber
+     &= Ldu^2 + 2Mdudv + Ndv^2   \label{eq:2}
+\end{align}
+
+ガウス曲率K、平均曲率Hは、長さ1の$d\vec{r}$に対する第二基本形式の値の最大値と最小値$\lambda_1, \lambda_2$を用いて
+次のように定義される。
+
+\begin{align}
+    K &= \lambda_1\lambda_2 \\
+    H &= (\lambda_1 + \lambda_2)/2   
+\end{align}
+これらは、式\ref{eq:metric}, \ref{eq:2}に対してラグランジュの未定乗数法を用いることで次のように表せる。
+
+\begin{align}
+    K &= \det(II)/\det(I) \\ \label{eq:gauss}
+    H &= \frac{EN+GL-2FM}{\det(I)}
+\end{align}
+
+いずれも$\det(I)$である種の規格化がなされていることに注意。これは$d\vec{r}$の長さを1にするという拘束条件によるものと考えられる。
+
+以上の表式は一般の曲面上の座標(u,v)や、それに対応する「自然な」接ベクトル$(\partdif{}{u}, \partdif{}{v})$に関するものであるが、この(u,v)の代わりに、曲面上の各点において自然な接ベクトルが正規直交基底をなすような場合を考えると簡単化できる\footnote{このような座標はたぶん局所的には必ず取れそう}。
+
+以下ではそのような場合を考え、その時の座標を$(x^1, x^2)$とする。また、対応する自然な接ベクトルを$\vec{e}_i$などと書くと、
+このとき、$d\vec{r}=\vec{e}_i dx^i$であり\footnote{アインシュタインの縮約規則を用いている。以下同様}、第一基本形式は、
+\begin{equation}
+    I = (dx^1)^2 + (dx^2)^2    
+\end{equation}
+また、第二基本形式は、
+\begin{align}
+    II &= \vec{e} \cdot dd\vec{r} = \vec{e}_3\cdot d(\vec{e}_i dx^i) \\
+        &= \vec{e}_3 \cdot d\vec{e}_i dx^i \\
+        &= \vec{e}_3 \cdot \partdif{\vec{e}_i}{x^j} dx^j dx^i 
+\end{align}
+となる。したがって、\ref{eq:2}と比較してガウス曲率の表式\ref{eq:gauss}も用いれば、
+\begin{align}
+    K = \det(\left ( \vec{e}_3 \cdot \partdif{\vec{e}_i}{x^j} \right )  ) \label{eq:gauss_mid1}
+\end{align}
+一方、接続形式${\omega_i}^j$は次のように定義されていた。
+\begin{align}
+    d\vec{e}_i = {\omega_i}^j \vec{e}_j    
+\end{align}
+この左辺を少し変形すると、
+\begin{align}
+    \partdif{\vec{e}_i}{x^j} dx^j = {\omega_i}^j \vec{e}_j
+\end{align}
+となるから、${\omega_i}^3 = b_{ij}dx^j$と書いておけば、
+\begin{align}
+    \vec{e}_3 \cdot \partdif{\vec{e}_i}{x^j} dx^j &= {\omega_i}^3 \\
+    &= b_{ij}dx^j
+\end{align}
+とかける。両辺の$dx^j$の係数を比較すると、
+\begin{align}
+    \vec{e}_3 \cdot \partdif{\vec{e}_i}{x^j} = b_{ij}
+\end{align}
+がわかる。これを式\ref{eq:gauss_mid1}に用いれば、
+\begin{align}
+    K = \det(b_{ij}) \label{eq:gauss_mid2}
+\end{align}
+がわかる。さらに、$dd\vec{e}_i = 0$ \footnote{この表式のdは外微分}からわかる表式$d{\omega_i}^k = {\omega_i}^j \wedge \omega_j^k$で、i=1,k=2とし、$b_{ij}$を用いて書き直すと、
+\begin{align}
+    d{\omega_1}^2 &= - {\omega_1}^j \wedge \omega_j^2 \\
+     &= - {\omega_1}^3 \wedge {\omega_3}^2 \\
+     &= -b_{1i} dx^i \wedge (-b_{2j} dx^j) \\
+     &= \det(b_{ij}) dx^1 \wedge dx^2
+\end{align}
+となる。したがって、式\ref{eq:gauss_mid2}と合わせて、
+\begin{align}
+    d{\omega_1}^2 &= K dx^1 \wedge dx^2
+\end{align}
+がわかる。
+\end{document}
