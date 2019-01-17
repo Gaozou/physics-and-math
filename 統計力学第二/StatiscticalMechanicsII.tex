@@ -10,5 +10,85 @@
 \section{BoltzmannのH定理}
 エントロピーの最大の特徴は不可逆な時間変化をするという点である。エントロピーが増加することを、ミクロな視点から考察したものとして、以下に述べるBoltzmannのH定理と呼ばれるものがある。
 
-分布関数
+以下では古典系で考える。古典粒子の体積当たりの分布関数$f(r,p,t)$\footnote{この節ではたびたびベクトルrやpを太字などにせずに表記する。}について、次のような量 H関数を考える。
+
+\begin{align}
+    H &= \int drdp f(r,p,t) \log f(r,p,t)
+\end{align}
+
+この関数が時間に伴いどのように変化するかを考えよう。
+Hを時間微分すると、
+\begin{align}
+    \frac{dH}{dt} &= \int drdp \frac{df}{dt}(1+\log f(r,p,t)) \label{eq:dHdt}
+\end{align}
+と書ける。そこで、$df/dt$について考えよう。
+
+まず、粒子間に相互作用がなく、各粒子は互いに独立に運動している場合を考える。このとき、各粒子の運動量は保存する。今考えたいのは$f(r,p,t)$の時間発展、すなわち状態が$(r,p)$であるような粒子の数がどのように変化していくかであるが、運動量保存であることから、$f(r,p,t)$の変化を追うには、同じ運動量$p$を持つ粒子のみを考えればよい。
+
+そこで、運動量$p$を一つ固定する。このとき、$f(r,p,t)$の微小時間dtの間の時間変化は、連続の式(粒子数の保存)より次のように書くことができる。
+\begin{align}
+    \frac{df}{dt} = - \div \vb{j}(r,p) 
+\end{align}
+ここで、$\vb{j}(r,p)$は位置$r$、運動量$p$である粒子の流れを表す。
+さらに、$\vb{j}(r,p)$は次のように書くことができる。
+\begin{align}
+    \vb{j}(r,p) &= \vb{v} f(r,p,t)
+\end{align}
+ここで、$\vb{v}$は運動量$p$の粒子の速度である。結局、
+\begin{align}
+    \frac{df}{dt} = - \div [\vb{v}f(r,p,t)] \label{eq:dfdt_no_int}
+\end{align}
+であることがわかる。以上の議論は、各粒子の運動量が保存しているために、$f(r,p,t)$の変化を考えるうえでは$f(r',p,t)$のような同じ$p$についてのみ考えればよいことから成り立つことに注意せよ。
+
+さて、求まった$df/dt$をH関数の微分の式に代入すると、
+
+\begin{align*}
+    \frac{dH}{dt} &= - \int drdp \div[\vb{v}f(r,p,t)](1+\log f(r,p,t)) \\
+        &= - \int drdp \div[\vb{v}f(r,p,t)](1+\log f(r,p,t)) \\
+        &= - \int drdp \frac{1}{m} \div[\vb{p}f(r,p,t) \log f(r,p,t)] \\
+        &= - \int dSdp \frac{1}{m} \vb{p}f(r,p,t) \log f(r,p,t)
+\end{align*}
+最後の行では、ガウスの発散定理を用いた。
+
+さて、最後の表面積分で、積分範囲を十分大きく取り、表面S付近には粒子がいないような状況を考えれば、これはゼロになる。したがって、相互作用がまったくない場合には、$\frac{dH}{dt}=0$であることがわかる。
+
+\vspace{1cm}
+
+次に、粒子間の相互作用がある場合を考えよう。この場合、以上までの議論とはことなり、各粒子の運動量は一般に保存せず、粒子間で運動量のやり取りが生じる。この場合には、$df/dt$は上記式\ref{eq:dfdt_no_int}から次のような変更を受ける。
+
+\begin{align}
+    \frac{df(r,p,t)}{dt} &= - \div [\vb{v}f(r,p,t)] + \int dp_1dp_2dp_3 \sigma(p_1,p_2,p_3,p) \{f(r,p_1,t)f(r,p_2,t)-f(r, p_3, t)f(r, p,t)\}
+\end{align}
+ここで、$\sigma(p_1,p_2,p_3,p)$は運動量$p_1,p_2$を持つ二つの粒子が相互作用（衝突）し、運動量がそれぞれ$p_3,p$となる散乱の衝突断面積である。散乱は可逆だから、この逆過程（すなわち運動量$p_3,p$を持つ二つの粒子が相互作用（衝突）し、運動量がそれぞれ$p_1,p_2$となる散乱）も同じ散乱断面積を持つことを用いている。
+さらに、$\sigma(p_1,p_2,p_3,p) \propto \delta((p_1+p_2)-(p_3+p))$(運動量保存)であることや、同様にしてエネルギー保存則を用いるともう一つ変数が減らせることを用い、式\ref{eq:dHdt}に代入すると、
+
+\begin{align}
+    \frac{dH}{dt} &= \int drdp \frac{df}{dt}(1+\log f(r,p,t))\\
+        &= \int drdp \int dp_3 \{\sigma(p_1,p_2,p_3,p) \{f(r,p_1,t)f(r,p_2,t)-f(r, p_3, t)f(r, p,t)\}(1+\log f(r,p,t))\} \label{eq:dHdt_2}
+\end{align}
+
+が得られる。ただし、前述のようにガウスの発散定理を用いて1つ項を落としてある。
+
+ここで系の対称性より、式\ref{eq:dHdt_2}において積分変数$p,p_3$の入れ替えを行っても値は変わらないはずである。また、$p_1,p_2$の組と$p,p_3$の組を入れ替えても、やはり式\ref{eq:dHdt_2}の値は変わらないはずである。さらに、$p_1,p_2$の組と$p,p_3$の組を入れ替えたのち、$p, p_3$を入れ替えたものも同じ値である。よって、
+
+\begin{align}
+    \frac{dH}{dt} &= \int drdp \int dp_3 \sigma(p_1,p_2,p_3,p) \{f(r,p_1,t)f(r,p_2,t)-f(r, p_3, t)f(r, p,t)\}(1+\log f(r,p,t)) \\ 
+        &= \int drdp \int dp_3 \sigma(p_1,p_2,p,p_3) \{f(r,p_1,t)f(r,p_2,t)-f(r, p, t)f(r, p_3,t)\}(1+\log f(r,p_3,t)) \\
+        &= \int drdp \int dp_3 \sigma(p_3,p,p_1,p_2) \{f(r,p_3,t)f(r,p,t)-f(r, p_1, t)f(r, p_2,t)\}(1+\log f(r,p_2,t)) \\
+        &= \int drdp \int dp_3 \sigma(p,p_3,p_1,p_2) \{f(r,p_3,t)f(r,p,t)-f(r, p_2, t)f(r, p_1,t)\}(1+\log f(r,p_1,t)) \\
+        &= \frac{1}{4} \int drdpdp_3 \sigma(p,p_3,p_1,p_2)
+            \{ f(r,p_1,t)f(r,p_2,t) - f(r,p_3,t)f(r,p,t) \}
+            \{\logf(r,p,t)f(r,p_3,t)- \logf(r,p_1,t)f(r,p_2,t)\}
+\end{align}
+
+最後の行は、上の四式を足し合わせて4で割ったものを整理することで得られる。この最後の式の被積分関数は、
+
+\begin{align*}
+    (a-b)(\log a-\log b) &\req 0 \\
+\end{align*}
+であることと$\sigma$が正であることから、結局
+\begin{align}
+    \frac{dH}{dt} \leq 0    
+\end{align}
+がわかる。すなわち、$H(t)$は単調減少である。
 \end{document}
