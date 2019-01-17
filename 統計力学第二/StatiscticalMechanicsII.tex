@@ -77,18 +77,21 @@ Hを時間微分すると、
         &= \int drdp \int dp_3 \sigma(p_3,p,p_1,p_2) \{f(r,p_3,t)f(r,p,t)-f(r, p_1, t)f(r, p_2,t)\}(1+\log f(r,p_2,t)) \\
         &= \int drdp \int dp_3 \sigma(p,p_3,p_1,p_2) \{f(r,p_3,t)f(r,p,t)-f(r, p_2, t)f(r, p_1,t)\}(1+\log f(r,p_1,t)) \\
         &= \frac{1}{4} \int drdpdp_3 \sigma(p,p_3,p_1,p_2)
-            \{ f(r,p_1,t)f(r,p_2,t) - f(r,p_3,t)f(r,p,t) \}
-            \{\logf(r,p,t)f(r,p_3,t)- \logf(r,p_1,t)f(r,p_2,t)\}
+            \{ f(r,p_1,t)f(r,p_2,t) - f(r,p_3,t)f(r,p,t) \} \\
+        & \hspace{1cm} \times \{\log f(r,p,t)f(r,p_3,t)- \log f(r,p_1,t)f(r,p_2,t)\}
 \end{align}
 
 最後の行は、上の四式を足し合わせて4で割ったものを整理することで得られる。この最後の式の被積分関数は、
-
 \begin{align*}
-    (a-b)(\log a-\log b) &\req 0 \\
+    (a-b)(\log a-\log b) &\geq 0 
 \end{align*}
 であることと$\sigma$が正であることから、結局
 \begin{align}
     \frac{dH}{dt} \leq 0    
 \end{align}
-がわかる。すなわち、$H(t)$は単調減少である。
+がわかる。すなわち、$H(t)$は単調減少である。これがBoltzmannのH定理と呼ばれるものである。
+
+エントロピーは$S=-H$で表されるから、エントロピーが単調増加であることもわかる。
+
+また、定常状態に落ち着く($dH/dt = 0$)となるための十分条件は、$f(r,p_1,t)f(r,p_2,t) - f(r,p_3,t)f(r,p,t)=0 $となることであるが、運動量保存$p_1+p_2 = p_3 + p$と同種粒子の場合のエネルギー保存則$p_1^2+p_2^2 = p_3^2+p^2$を用いると、$f(r,p,t)\propto \exp(Ap+Bp^2)$の形の分布関数は$dH/dt=0$を満たしていることがわかる。さらに空間反転対称性も課せば、$A=0$もわかる。これはMaxwell-Boltzmann分布の形と一致している。
 \end{document}
