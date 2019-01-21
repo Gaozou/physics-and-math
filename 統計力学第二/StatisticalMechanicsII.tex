@@ -98,9 +98,9 @@ Hを時間微分すると、
 \section{Wiener–Khinchinの定理}
 一般の確率過程を考えよう。例えば、次のようなランジュバン方程式で記述されるブラウン運動のような確率過程である。
 \begin{align}
-    M\frac{d\vb*{v}}{dt} &= -\frac{1}{\mu_m} \vb*{v} + \vb*{F}_{ext} + \vb*{R(t)} \label{eq:langevin}
+    M\frac{dv}{dt} &= -\frac{1}{\mu_m} v + F_{ext} + R(t) \label{eq:langevin}
 \end{align}
-ここで$\vb*{R(t)}$はランダム力である。
+ここで$R(t)$はランダム力である。
 
 さて、一般の確率過程$v(t)$について、実時間相関関数$C_v(t) = \langle v(t+t_0)v(t_0)\rangle$を考えよう。$C_v(t)$が$t_0$によらないときこの確率過程は定常的であると呼ばれるが、以下では定常的であるような場合のみを考えることにする。
 
@@ -138,27 +138,27 @@ $v(t), C_v(t)$のフーリエ変換を$v(\omega), C_v(\omega)$とする。
 \section{Langevin方程式の解析}
 Langevin方程式を再掲する。
 \begin{align}
-    M\frac{d\vb*{v}}{dt} &= -\frac{1}{\mu_m} \vb*{v} + \vb*{F}_{ext} + \vb*{R(t)} \label{eq:langevin}
+    M\frac{dv}{dt} &= -\frac{1}{\mu_m} v + F_{ext} + R(t) \label{eq:langevin}
 \end{align}
-さて、このLangevin方程式をフーリエ変換し、$\vb*{v}(\omega)$について解くと、
+さて、このLangevin方程式をフーリエ変換し、$v(\omega)$について解くと、
 \begin{align}
-    \vb*{v}(\omega) &= \frac{\vb*{F}_{ext} + \vb*{R(t)}}{M(-i\omega+\gamma)} \label{eq:vomega}
+    v(\omega) &= \frac{F_{ext} + R(t)}{M(-i\omega+\gamma)} \label{eq:vomega}
 \end{align}
 ここで$\gamma=1/M\mu_m$は減衰率である。
-さて、まず$\vb*{v}(\omega)$の期待値をとると、$\langle R(t)\rangle = 0 $とすれば、
+さて、まず$v(\omega)$の期待値をとると、$\langle R(t)\rangle = 0 $とすれば、
 \begin{align}
-    \langle \vb*{v}(\omega) \rangle &= \frac{\vb*{F}_{ext}}{M(-i\omega+\gamma)} 
+    \langle v(\omega) \rangle &= \frac{F_{ext}}{M(-i\omega+\gamma)} 
 \end{align}
-がわかる。したがって、振動数に依存する移動度$\mu(\omega)$を$\langle \vb*{v}(\omega) \rangle = \mu(\omega) \vb*{F}_{ext}$で定義すれば、
+がわかる。したがって、振動数に依存する移動度$\mu(\omega)$を$\langle v(\omega) \rangle = \mu(\omega) F_{ext}$で定義すれば、
 \begin{align}
     \mu(\omega) = \frac{1}{M(-i\omega+\gamma)} \label{eq:mobility}
 \end{align}
 がわかる。
 
-次に、外力$\vb*{F}_{ext}=0$の場合に、$\vb*{v(t)}$がランダム力$\vb*{R(t)}$とどのような関係にあるかを調べよう。式\ref{eq:vomega}から、
+次に、外力$F_{ext}=0$の場合に、$v(t)$がランダム力$R(t)$とどのような関係にあるかを調べよう。式\ref{eq:vomega}から、
 \begin{align}
-    \langle v(\omega)v(\omega')^*\rangle &= \frac{\langle \vb*{R(t)}\vb*{R(t)^*}\rangle}{|M(-i\omega+\gamma)|^2} \\
+    \langle v(\omega)v(\omega')^*\rangle &= \frac{\langle R(t)R(t)^*\rangle}{|M(-i\omega+\gamma)|^2} \\
     \therefore C_v(\omega) &= \frac{C_R(\omega)}{M^2(\omega^2+\gamma^2)}
 \end{align}
-ここで、Wiener–Khinchinの定理を$\vb*{v}と\vb*{R}$について用いた。
+ここで、Wiener–Khinchinの定理を$vとR$について用いた。
 \end{document}
