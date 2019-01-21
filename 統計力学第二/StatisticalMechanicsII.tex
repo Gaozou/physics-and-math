@@ -27,26 +27,26 @@ Hを時間微分すると、
 
 そこで、運動量$p$を一つ固定する。このとき、$f(r,p,t)$の微小時間dtの間の時間変化は、連続の式(粒子数の保存)より次のように書くことができる。
 \begin{align}
-    \frac{df}{dt} = - \div \vb{j}(r,p) 
+    \frac{df}{dt} = - \div \vb*{j}(r,p) 
 \end{align}
-ここで、$\vb{j}(r,p)$は位置$r$、運動量$p$である粒子の流れを表す。
-さらに、$\vb{j}(r,p)$は次のように書くことができる。
+ここで、$\vb*{j}(r,p)$は位置$r$、運動量$p$である粒子の流れを表す。
+さらに、$\vb*{j}(r,p)$は次のように書くことができる。
 \begin{align}
-    \vb{j}(r,p) &= \vb{v} f(r,p,t)
+    \vb*{j}(r,p) &= \vb*{v} f(r,p,t)
 \end{align}
-ここで、$\vb{v}$は運動量$p$の粒子の速度である。結局、
+ここで、$\vb*{v}$は運動量$p$の粒子の速度である。結局、
 \begin{align}
-    \frac{df}{dt} = - \div [\vb{v}f(r,p,t)] \label{eq:dfdt_no_int}
+    \frac{df}{dt} = - \div [\vb*{v}f(r,p,t)] \label{eq:dfdt_no_int}
 \end{align}
 であることがわかる。以上の議論は、各粒子の運動量が保存しているために、$f(r,p,t)$の変化を考えるうえでは$f(r',p,t)$のような同じ$p$についてのみ考えればよいことから成り立つことに注意せよ。
 
 さて、求まった$df/dt$をH関数の微分の式に代入すると、
 
 \begin{align*}
-    \frac{dH}{dt} &= - \int drdp \div[\vb{v}f(r,p,t)](1+\log f(r,p,t)) \\
-        &= - \int drdp \div[\vb{v}f(r,p,t)](1+\log f(r,p,t)) \\
-        &= - \int drdp \frac{1}{m} \div[\vb{p}f(r,p,t) \log f(r,p,t)] \\
-        &= - \int dSdp \frac{1}{m} \vb{p}f(r,p,t) \log f(r,p,t)
+    \frac{dH}{dt} &= - \int drdp \div[\vb*{v}f(r,p,t)](1+\log f(r,p,t)) \\
+        &= - \int drdp \div[\vb*{v}f(r,p,t)](1+\log f(r,p,t)) \\
+        &= - \int drdp \frac{1}{m} \div[\vb*{p}f(r,p,t) \log f(r,p,t)] \\
+        &= - \int dSdp \frac{1}{m} \vb*{p}f(r,p,t) \log f(r,p,t)
 \end{align*}
 最後の行では、ガウスの発散定理を用いた。
 
@@ -57,7 +57,7 @@ Hを時間微分すると、
 次に、粒子間の相互作用がある場合を考えよう。この場合、以上までの議論とはことなり、各粒子の運動量は一般に保存せず、粒子間で運動量のやり取りが生じる。この場合には、$df/dt$は上記式\ref{eq:dfdt_no_int}から次のような変更を受ける。
 
 \begin{align}
-    \frac{df(r,p,t)}{dt} &= - \div [\vb{v}f(r,p,t)] + \int dp_1dp_2dp_3 \sigma(p_1,p_2,p_3,p) \{f(r,p_1,t)f(r,p_2,t)-f(r, p_3, t)f(r, p,t)\}
+    \frac{df(r,p,t)}{dt} &= - \div [\vb*{v}f(r,p,t)] + \int dp_1dp_2dp_3 \sigma(p_1,p_2,p_3,p) \{f(r,p_1,t)f(r,p_2,t)-f(r, p_3, t)f(r, p,t)\}
 \end{align}
 ここで、$\sigma(p_1,p_2,p_3,p)$は運動量$p_1,p_2$を持つ二つの粒子が相互作用（衝突）し、運動量がそれぞれ$p_3,p$となる散乱の衝突断面積である。散乱は可逆だから、この逆過程（すなわち運動量$p_3,p$を持つ二つの粒子が相互作用（衝突）し、運動量がそれぞれ$p_1,p_2$となる散乱）も同じ散乱断面積を持つことを用いている。
 さらに、$\sigma(p_1,p_2,p_3,p) \propto \delta((p_1+p_2)-(p_3+p))$(運動量保存)であることや、同様にしてエネルギー保存則を用いるともう一つ変数が減らせることを用い、式\ref{eq:dHdt}に代入すると、
@@ -94,4 +94,71 @@ Hを時間微分すると、
 エントロピーは$S=-H$で表されるから、エントロピーが単調増加であることもわかる。
 
 また、定常状態に落ち着く($dH/dt = 0$)となるための十分条件は、$f(r,p_1,t)f(r,p_2,t) - f(r,p_3,t)f(r,p,t)=0 $となることであるが、運動量保存$p_1+p_2 = p_3 + p$と同種粒子の場合のエネルギー保存則$p_1^2+p_2^2 = p_3^2+p^2$を用いると、$f(r,p,t)\propto \exp(Ap+Bp^2)$の形の分布関数は$dH/dt=0$を満たしていることがわかる。さらに空間反転対称性も課せば、$A=0$もわかる。これはMaxwell-Boltzmann分布の形と一致している。
+
+\section{Wiener–Khinchinの定理}
+一般の確率過程を考えよう。例えば、次のようなランジュバン方程式で記述されるブラウン運動のような確率過程である。
+\begin{align}
+    M\frac{d\vb*{v}}{dt} &= -\frac{1}{\mu_m} \vb*{v} + \vb*{F}_{ext} + \vb*{R(t)} \label{eq:langevin}
+\end{align}
+ここで$\vb*{R(t)}$はランダム力である。
+
+さて、一般の確率過程$v(t)$について、実時間相関関数$C_v(t) = \langle v(t+t_0)v(t_0)\rangle$を考えよう。$C_v(t)$が$t_0$によらないときこの確率過程は定常的であると呼ばれるが、以下では定常的であるような場合のみを考えることにする。
+
+$v(t), C_v(t)$のフーリエ変換を$v(\omega), C_v(\omega)$とする。
+\begin{align}
+    v(\omega) &= \int_{-\infty}^{\infty} e^{-i\omega t} v(t) dt \\ 
+    C_v(\omega) &= \int_{-\infty}^{\infty} e^{-i\omega t} C_v(t) dt
+\end{align}
+このとき、突然ではあるが$\langle v(\omega)v(\omega')^*\rangle$を計算してみよう。
+
+\begin{align}
+    \langle v(\omega)v(\omega')^*\rangle &= \int dt dt' e^{-i\omega t} e^{i\omega' t'} \langle v(t) v(t')\rangle \\
+        &= \int dt dt' e^{-i(\omega-\omega')t} e^{i\omega'(t'-t)} \langle v(t) v(t'-t +t)\rangle \\
+        &= \int dt dt' e^{-i(\omega-\omega')t} e^{i\omega'(t'-t)} C_v(t'-t) \\
+        &= \int dt e^{-i(\omega-\omega')t} C_v(\omega') \\
+        &= 2\pi C_v(\omega) \delta(\omega-\omega')
+\end{align}
+ここで、系が定常的であることを用いた。
+
+以上の計算から、$\langle v(\omega)v(\omega')^*\rangle$はデルタ関数の定数倍であることがわかる。
+そこで、この定数を$I_v(\omega)$と置き、$v$のスペクトル強度と呼ぶことにしよう。すなわち、
+\begin{align}
+    \langle v(\omega)v(\omega')^*\rangle &= I_v(\omega) \delta(\omega-\omega') \\
+        &= 2\pi C_v(\omega) \delta(\omega-\omega')
+\end{align}
+これより直ちに、
+\begin{align}
+    I_v(\omega) = 2\pi C_v(\omega) \label{eq:Wiener–Khinchin}
+\end{align}
+がわかる。
+これがWiener–Khinchinの定理と呼ばれる等式である。
+
+この等式のありがたみは、$C_v(\omega)$の計算を、$\langle v(\omega)v(\omega')^*\rangle$に代えることができるという点である。次は、これを用いて実際にLangevin方程式を解析し、Einsteinの関係式などを導いてみよう。
+
+\section{Langevin方程式の解析}
+Langevin方程式を再掲する。
+\begin{align}
+    M\frac{d\vb*{v}}{dt} &= -\frac{1}{\mu_m} \vb*{v} + \vb*{F}_{ext} + \vb*{R(t)} \label{eq:langevin}
+\end{align}
+さて、このLangevin方程式をフーリエ変換し、$\vb*{v}(\omega)$について解くと、
+\begin{align}
+    \vb*{v}(\omega) &= \frac{\vb*{F}_{ext} + \vb*{R(t)}}{M(-i\omega+\gamma)} \label{eq:vomega}
+\end{align}
+ここで$\gamma=1/M\mu_m$は減衰率である。
+さて、まず$\vb*{v}(\omega)$の期待値をとると、$\langle R(t)\rangle = 0 $とすれば、
+\begin{align}
+    \langle \vb*{v}(\omega) \rangle &= \frac{\vb*{F}_{ext}}{M(-i\omega+\gamma)} 
+\end{align}
+がわかる。したがって、振動数に依存する移動度$\mu(\omega)$を$\langle \vb*{v}(\omega) \rangle = \mu(\omega) \vb*{F}_{ext}$で定義すれば、
+\begin{align}
+    \mu(\omega) = \frac{1}{M(-i\omega+\gamma)} \label{eq:mobility}
+\end{align}
+がわかる。
+
+次に、外力$\vb*{F}_{ext}=0$の場合に、$\vb*{v(t)}$がランダム力$\vb*{R(t)}$とどのような関係にあるかを調べよう。式\ref{eq:vomega}から、
+\begin{align}
+    \langle v(\omega)v(\omega')^*\rangle &= \frac{\langle \vb*{R(t)}\vb*{R(t)^*}\rangle}{|M(-i\omega+\gamma)|^2} \\
+    \therefore C_v(\omega) &= \frac{C_R(\omega)}{M^2(\omega^2+\gamma^2)}
+\end{align}
+ここで、Wiener–Khinchinの定理を$\vb*{v}と\vb*{R}$について用いた。
 \end{document}

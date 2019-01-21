@@ -1,9 +1,9 @@
-This is e-upTeX, Version 3.14159265-p3.8.0-u1.23-180226-2.6 (utf8.uptex) (TeX Live 2018/W32TeX) (preloaded format=uplatex 2018.9.27)  17 JAN 2019 15:42
+This is e-upTeX, Version 3.14159265-p3.8.0-u1.23-180226-2.6 (utf8.uptex) (TeX Live 2018/W32TeX) (preloaded format=uplatex 2018.9.27)  21 JAN 2019 23:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"c:/Users/yugo9/Documents/Scripts/TeX Scripts/数物メモ/統計力学第二/StatiscticalMechanicsII"
-(c:/Users/yugo9/Documents/Scripts/TeX Scripts/数物メモ/統計力学第二/StatiscticalMechanicsII.tex
+**"c:/Users/yugo9/Documents/Scripts/TeX Scripts/数物メモ/統計力学第二/StatisticalMechanicsII"
+(c:/Users/yugo9/Documents/Scripts/TeX Scripts/数物メモ/統計力学第二/StatisticalMechanicsII.tex
 pLaTeX2e <2018-04-01u02>+1 (based on LaTeX2e <2018-04-01> patch level 2)
 Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
 (c:/texlive/2018/texmf-dist/tex/platex/jsclasses/jsarticle.cls
@@ -1874,8 +1874,12 @@ Package: physics
 . 
 . Defining command \homework with sig. '' on line 764.
 .................................................
-)) (./StatiscticalMechanicsII.aux)
-\openout1 = `StatiscticalMechanicsII.aux'.
+)) (./StatisticalMechanicsII.aux
+
+LaTeX Warning: Label `eq:langevin' multiply defined.
+
+)
+\openout1 = `StatisticalMechanicsII.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
 LaTeX Font Info:    ... okay on input line 8.
@@ -2027,14 +2031,18 @@ LaTeX Font Info:    Font shape `JT2/mc/m/n' will be
 (Font)              scaled to size 5.5481pt on input line 13.
  [1
 
-] [2] [3] (./StatiscticalMechanicsII.aux) ) 
+] [2] [3] [4] [5] (./StatisticalMechanicsII.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 29090 strings out of 493270
- 613418 string characters out of 6148034
- 686613 words of memory out of 5000000
- 32677 multiletter control sequences out of 15000+600000
+ 29094 strings out of 493270
+ 613468 string characters out of 6148034
+ 686685 words of memory out of 5000000
+ 32681 multiletter control sequences out of 15000+600000
  552146 words of font info for 123 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
- 56i,12n,83p,10509b,382s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,10n,83p,10508b,382s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on StatiscticalMechanicsII.dvi (3 pages, 13572 bytes).
+Output written on StatisticalMechanicsII.dvi (5 pages, 20184 bytes).
