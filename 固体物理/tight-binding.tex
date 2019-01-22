@@ -1,0 +1,121 @@
+\documentclass[uplatex,dvipdfmx]{jsarticle}
+
+\input{"preamble.tex"}
+
+\title{Tight-Binding Modelの整理}
+\author{ガオゾウ}
+
+\newcommand{\crt}[1]{\hat{#1}^\dagger}
+\newcommand{\anh}[1]{\hat{#1}}
+
+\begin{document}
+\maketitle
+
+\section{はじめに}
+    固体物理の試験勉強をしていたらTight-Binding模型の初等的（？）な書き方と生成・消滅演算子を使った書き方の関係がよくわからなくなったのでざっくり整理した。なんで第二量子化をやった瞬間、生成・消滅演算子を使ったハミルトニアンをいきなり書いてさも当然のようにTight-Binding Modelであると人は主張し始めるのだろうか。。。まあなんとなくわかるけど、こういうのは一回は行間を埋めておきたいという気分になるよね。と思ったのでその間を簡単に埋めてみた。一番初等的な波動関数使った書き方はだるかったのでブラケット記法のやつしか書いてません。
+
+\section{Tight-Binding Model}
+    ここではTight-Binding Model(強束縛近似)について述べる。
+    結晶\footnote{簡単のため、結晶を構成する原子は全て同じものとする。}中の電子状態を考えよう。結晶中の電子状態$\phi(\vb*{r})$は、次のシュレディンガー方程式の解である。
+    \begin{align}
+        H\phi &= E\phi \\
+        H &= -\frac{\hbar^2}{2m}\nabla^2 + V(\vb*{r})
+    \end{align}
+    ここで、$V$は結晶中のポテンシャルである。今考えているのは理想的な結晶なので、$V$は結晶の並進ベクトルだけの並進操作に対して不変である。
+
+    さて、この方程式の解がどんなものであるかを考えたいのだが、結晶は原子が規則的に並んで構成されている。Tight-Binding Modelでは、結晶中の電子状態を、孤立時の原子の電子状態からの摂動によって考える。
+
+    まずここで用いる記号について整理する。位置$\vb*{R}_i$にある孤立原子の電子軌道の波動関数を$\phi_\alpha(\vb*{r}-\vb*{R}_i)$とし、対応する状態ベクトルを$\ket{i,\alpha}$とかく。
+    \begin{align}
+        H_0 \phi_\alpha(\vb*{r}-\vb*{R}_i) = \varepsilon_0 \phi_\alpha(\vb*{r}-\vb*{R}_i) \\
+        H_0 = -\frac{\hbar^2}{2m}\nabla^2 + v(\vb*{r}-\vb*{R}_i)
+    \end{align}
+    ここで、$H_0$は孤立原子のハミルトニアンであり、$v(\vb*{r}-\vb*{R}_i)$は位置$\vb*{R}_i$にある原子のポテンシャルである。
+    \vspace{0.5cm}
+
+    それではTight-Binding Modelにおける仮定を述べよう。
+    最も一般的なTight-Binding Modelにおける仮定は次である。
+    \begin{enumerate}
+        \item $\{\ket{i, \alpha}\}_{i,\alpha}$によって考えている系の状態空間が張られている。\footnote{これは仮定しなくても導ける気がするが、あとでも述べるようにしばしば$\alpha$をある特定の軌道一つ（例えば原子の最外殻軌道）に限るような近似が行われるので、ここでは明示した。}
+        \item $\bra{i,\alpha}\ket{j, \beta} = \delta_{ij}\delta_{\alpha\beta}$
+        \item $\bra{i,\alpha}H\ket{j,\beta} = \begin{cases}
+            \gamma_{i,\alpha, j,\beta} \qq{原子iと原子jが近い時} \\
+            0 \qq{それ以外}
+        \end{cases}$
+    \end{enumerate}
+    ここで、第三の仮定において原子iと原子jが「近い」がどのような条件なのかは、その時考えている系による。最も簡単なのは、原子iと原子jが隣り合っているときのみ「近い」とすることで、しばしば行われる。
+
+    第一の仮定は、今考えている原子軌道によって系の状態空間が張られているというものである。これはLCAO(Linear Combination Atomic Orbital)近似と等価である。
+
+    第二の仮定は、異なる原子i,j間の原子軌道の重なりは十分小さく無視できるということである\footnote{$\delta_{\alpha,\beta}$については、原子軌道の直交性からいえる（と思う）。}。第二の仮定は、原子が十分近い時のみ、ハミルトニアンの行列要素を有限とし、それ以外は無視するという近似に相当する。$i\neq j$のとき、$\gamma_{ij}$は重なり積分、飛び移り積分(transfer integral)などと呼ばれる。
+
+    また、これらに加えてしばしば、考える原子軌道の種類(上で$\alpha$とラベル付けしている)を一つのみにするという近似が取り入れられることも多い。
+
+    \section{具体例：一次元の場合(ブラケット記法)}
+
+    実際に以上の仮定のもとで、一次元の場合にシュレディンガー方程式を解いてみよう。
+
+    格子間隔$a$の一次元結晶（周期的境界条件を課す）を考える。先に述べたような各原子の原子軌道は一種類だけ考えればよい場合を考えて、上で書いていた$\alpha$の添え字は省略し、原子の位置のみで状態をラベルする。このとき、第一の仮定より、系の状態空間は$\{\ket{i}\}_{i}$で張られていると考える。さらに、$\{\ket{i}\}_{i}$は第二の仮定より正規直交基底と考えてよい。
+    
+    ハミルトニアンの行列要素を書こう。第三の仮定と、いくつかの簡単化を施して、
+    \begin{align}
+        \bra{i}H\ket{j} = \begin{cases}
+            \varepsilon_0 - \alpha =: \varepsilon \qq{i=jの時}\\
+            \gamma \qq{$j=i\pm 1$} \\
+            0 \qq{それ以外}
+        \end{cases} \label{eq:ex_ham}
+    \end{align}
+    であるとしよう。ここで、$\alpha$は実数で、原子が集まったことによる安定化のエネルギーを表す。また、$\gamma_{ij}$は原子iとjが隣り合うときのみ有限であるとし、iとjによらずすべて同じ実数$\gamma$であるとした。
+
+    以上により完全に問題が定まった。系のハミルトニアンが式\ref{eq:ex_ham}のように与えられる系について、$\{\ket{i}\}_{i}$で張られる状態空間上で固有エネルギーと固有状態を求めればよい。
+
+    ここからはいかにしてハミルトニアンの固有値を求めるかという計算上のテクニックになるが、結晶中ではよく行われるテクニックとしてフーリエ変換を行い基底を取り換えるということがよく行われる。一般にBlochの定理により、並進対称性のある系ではフーリエ変換を行うと、ハミルトニアンをブロック対角化できることが知られているからである。これに基づいて、実際にハミルトニアンをフーリエ変換することを考える。そのために、基底を$\{\ket{i}\}_{i}$から次のような$\ket{k}$の集合に取り換えよう。
+
+    \begin{align}
+        \ket{k} &= \frac{1}{\sqrt{N}} \sum_{i=1}^N \exp(ikR_i)\ket{i} \qq{$k=\frac{2\pi}{Na}n$, $n$:整数}\\
+        \ket{i} &= \frac{1}{\sqrt{N}} \sum_{k} \exp(ikR_i)\ket{k} 
+    \end{align}
+
+    $\ket{k}$と$\ket{i}$で表している状態は全く違うので注意してほしい\footnote{紛らわしいと思うけどいい感じのノーテーションが思いつかないし面倒くさい。}。このノートで$k$と書いたら必ず波数のことを指す。
+
+    また、ここでの波数$k$は、第一ブリルアンゾーンを動くものとする。
+
+    この新しい基底によりハミルトニアンの行列要素を再度計算してみよう。
+
+    \begin{align}
+        \bra{k'}H\ket{k} &= \frac{1}{N} \sum_{j=1}^N \exp(-ik'R_j)\bra{j} H \sum_{i=1}^N \exp(ikR_i)\ket{i} \\
+        &= \frac{1}{N} \sum_{i,j} \exp(ikR_i-ik'R_j)\bra{j}H\ket{i} \\
+        &= \{\varepsilon + \gamma(\exp(ika)+\exp(-ika))\}\delta_{kk'} \\
+        &= \{\varepsilon + 2\gamma \cos(ka)\}\delta_{kk'}
+    \end{align}
+    となる。途中で、公式$\sum_{i=1}^N exp(i(k-k')R_i) = \delta_{kk'}$を使った。
+
+    この計算から、ハミルトニアンは基底$\{\ket{k}\}_{k}$を用いて表示するとすでに対角化されていることがわかる。したがって、系の固有エネルギーは、$\varepsilon(k) = \varepsilon + 2\gamma \cos(ka)$である。これはいわゆるバンド構造である。
+
+    \section{具体例：一次元の場合(生成・消滅演算子)}
+    最後に、以上でやったことを生成・消滅演算子を用いて書き直しておこう。基底$\{\ket{i}\}_{i}$に対応する生成・消滅演算子を$\crt{a}_i, \anh{a}_i$と書くことにしよう。今考えているのは電子なので、これらはフェルミオンの交換関係
+    \begin{align}
+        \acomm{\crt{a}_i}{\anh{a}_j} = \delta_{ij}, \quad 
+        \acomm{\crt{a}_i}{\crt{a}_j} = 0 , quad \acomm{\anh{a}_i}{\anh{a}_j} = 0        
+    \end{align}
+    を満たす。このときハミルトニアンは、式\ref{eq:ex_ham}からも明らかなように、先に述べた種々の仮定を用いると次のように書ける。
+    
+    \begin{align}
+        H &= \sum_{i=1}^N \crt{a}_i\anh{a}_i + \sum_{i=1}^N \left(\crt{a}_{i+1}\anh{a}_{i} + \crt{a_{i}}\anh{a}_{i+1} \right)
+    \end{align}
+    このハミルトニアンは、すでにやって見せたように、フーリエ変換すると対角化できる。
+
+    $\crt{a}_i, \anh{a}_i$をフーリエ変換した生成・消滅演算子は、
+    \begin{align}
+        \crt{a_k} &= \frac{1}{\sqrt{N}} \sum_{i=1}^N \exp(ikR_i)\crt{a}_i \\
+        \anh{a_k} &= \frac{1}{\sqrt{N}} \sum_{i=1}^N \exp(-ikR_i)\anh{a}_i        
+    \end{align}
+    もまたフェルミオンの交換関係を満たすことが確かめられる。これを用いてハミルトニアンを書き直すと、
+    \begin{align}
+        H = \sum_k \left(\varepsilon+2\gamma \cos(ka) \right)\crt{a}_k \anh{a}_k
+    \end{align}
+
+    となり、対角化されていることがわかる。
+
+
+\end{document}
