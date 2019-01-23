@@ -16,7 +16,7 @@
 
 \section{Tight-Binding Model}
     ここではTight-Binding Model(強束縛近似)について述べる。
-    結晶\footnote{簡単のため、結晶を構成する原子は全て同じものとする。}中の電子状態を考えよう。結晶中の電子状態$\phi(\vb*{r})$は、次のシュレディンガー方程式の解である。
+    結晶\footnote{簡単のため、結晶を構成する原子は全て同じものとする。}中の電子状態を考えよう。本当は結晶中では多数の電子が相互作用しているが、よく行われるように、他の電子からの影響を一電子ポテンシャルに取り込むことで、一体問題に帰着できるとしよう。このとき、結晶中の電子状態$\phi(\vb*{r})$は、次のシュレディンガー方程式の解である。
     \begin{align}
         H\phi &= E\phi \\
         H &= -\frac{\hbar^2}{2m}\nabla^2 + V(\vb*{r})
@@ -39,7 +39,7 @@
         \item $\{\ket{i, \alpha}\}_{i,\alpha}$によって考えている系の状態空間が張られている。\footnote{これは仮定しなくても導ける気がするが、あとでも述べるようにしばしば$\alpha$をある特定の軌道一つ（例えば原子の最外殻軌道）に限るような近似が行われるので、ここでは明示した。}
         \item $\bra{i,\alpha}\ket{j, \beta} = \delta_{ij}\delta_{\alpha\beta}$
         \item $\bra{i,\alpha}H\ket{j,\beta} = \begin{cases}
-            \gamma_{i,\alpha, j,\beta} \qq{原子iと原子jが近い時} \\
+            -\gamma_{i,\alpha, j,\beta} \qq{原子iと原子jが近い時} \\
             0 \qq{それ以外}
         \end{cases}$
     \end{enumerate}
@@ -61,7 +61,7 @@
     \begin{align}
         \bra{i}H\ket{j} = \begin{cases}
             \varepsilon_0 - \alpha =: \varepsilon \qq{i=jの時}\\
-            \gamma \qq{$j=i\pm 1$} \\
+            -\gamma \qq{$j=i\pm 1$} \\
             0 \qq{それ以外}
         \end{cases} \label{eq:ex_ham}
     \end{align}
@@ -85,8 +85,8 @@
     \begin{align}
         \bra{k'}H\ket{k} &= \frac{1}{N} \sum_{j=1}^N \exp(-ik'R_j)\bra{j} H \sum_{i=1}^N \exp(ikR_i)\ket{i} \\
         &= \frac{1}{N} \sum_{i,j} \exp(ikR_i-ik'R_j)\bra{j}H\ket{i} \\
-        &= \{\varepsilon + \gamma(\exp(ika)+\exp(-ika))\}\delta_{kk'} \\
-        &= \{\varepsilon + 2\gamma \cos(ka)\}\delta_{kk'}
+        &= \{\varepsilon - \gamma(\exp(ika)+\exp(-ika))\}\delta_{kk'} \\
+        &= \{\varepsilon - 2\gamma \cos(ka)\}\delta_{kk'}
     \end{align}
     となる。途中で、公式$\sum_{i=1}^N exp(i(k-k')R_i) = \delta_{kk'}$を使った。
 
@@ -101,7 +101,7 @@
     を満たす。このときハミルトニアンは、式\ref{eq:ex_ham}からも明らかなように、先に述べた種々の仮定を用いると次のように書ける。
     
     \begin{align}
-        H &= \sum_{i=1}^N \crt{a}_i\anh{a}_i + \sum_{i=1}^N \left(\crt{a}_{i+1}\anh{a}_{i} + \crt{a_{i}}\anh{a}_{i+1} \right)
+        H &= \sum_{i=1}^N \crt{a}_i\anh{a}_i -\gamma \sum_{i=1}^N \left(\crt{a}_{i+1}\anh{a}_{i} + \crt{a_{i}}\anh{a}_{i+1} \right)
     \end{align}
     このハミルトニアンは、すでにやって見せたように、フーリエ変換すると対角化できる。
 
@@ -112,7 +112,7 @@
     \end{align}
     もまたフェルミオンの交換関係を満たすことが確かめられる。これを用いてハミルトニアンを書き直すと、
     \begin{align}
-        H = \sum_k \left(\varepsilon+2\gamma \cos(ka) \right)\crt{a}_k \anh{a}_k
+        H = \sum_k \left(\varepsilon-2\gamma \cos(ka) \right)\crt{a}_k \anh{a}_k
     \end{align}
 
     となり、対角化されていることがわかる。

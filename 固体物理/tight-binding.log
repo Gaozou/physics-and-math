@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.14159265-p3.8.0-u1.23-180226-2.6 (utf8.uptex) (TeX Live 2018/W32TeX) (preloaded format=uplatex 2018.9.27)  23 JAN 2019 02:15
+This is e-upTeX, Version 3.14159265-p3.8.0-u1.23-180226-2.6 (utf8.uptex) (TeX Live 2018/W32TeX) (preloaded format=uplatex 2018.9.27)  23 JAN 2019 18:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2034,10 +2034,10 @@ LaTeX Font Info:    Font shape `JT2/mc/m/n' will be
 Here is how much of TeX's memory you used:
  29090 strings out of 493270
  613291 string characters out of 6148034
- 686594 words of memory out of 5000000
+ 686595 words of memory out of 5000000
  32677 multiletter control sequences out of 15000+600000
  552255 words of font info for 124 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
  56i,19n,83p,10493b,382s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on tight-binding.dvi (4 pages, 17212 bytes).
+Output written on tight-binding.dvi (4 pages, 17532 bytes).
