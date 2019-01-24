@@ -1,0 +1,107 @@
+\documentclass[uplatex,dvipdfmx]{jsarticle}
+
+\input{"preamble.tex"}
+
+\title{デルタ関数型ポテンシャルによる散乱の計算}
+\author{ガオゾウ}
+
+\begin{document}
+\maketitle
+\section{概要}
+TwitterしてたらTLでB2がデルタ関数型ポテンシャルによる散乱の計算をしていたので何となく自分もしてみた。
+
+\section{問題設定}
+一次元の問題を考える。$x=0$の点にデルタ関数型ポテンシャルが存在するとする。$x=-\infty$から$\psi(x)=e^{ikx}$の入射波が入射してきたときの、波の透過率と反射率を計算せよ。
+
+\section{解答}
+このような問題の場合には、普通定常状態を考える。これは、常に$x=-\infty$から粒子が飛んできているときに、その時の「平均の」反射率・透過率を求めることに相当すると考えられる（と思う）。
+
+さて、今の問題ではポテンシャル$V$とハミルトニアン$H(x)$は次のように与えられる。
+
+\begin{align}
+    H(x) &= -\frac{\hbar^2}{2m} \dv[2]{}{x} + V(x) \\
+    V(x) &= \delta(x)
+\end{align}
+
+このとき、定常状態を求めるシュレーディンガー方程式は次のようになる。
+\begin{align}
+    H\psi &= E\psi \qq{すなわち、} \\
+    \left\{-\frac{\hbar^2}{2m} \dv[2]{}{x} + \delta(x) \right\}\psi &= E\psi \label{eq:sch}
+\end{align}
+
+この微分方程式の解を求めよう。まず、この微分方程式は$x>0$と$x<0$のそれぞれでは簡単に解くことができる。実際、例えば$x>0$では$H(x)=-\frac{1}{2m} \dv[2]{}{x}$であるから、シュレーディンガー方程式は
+\begin{align}
+    -\frac{\hbar^2}{2m} \dv[2]{}{x}\psi &= E\psi 
+\end{align}
+となり、非常に簡単な二階の微分方程式である。これを解けば、
+\begin{align}
+    \psi(x) &= C_1 e^{ikx} + C_2 e^{-ikx}   \\
+    E &= \frac{\hbar^2k^2}{2m} 
+\end{align}
+がわかる。ここで$C_1, C_2$は任意の定数である\footnote{本当は波動関数を規格化する必要があるが、今はあまり気にしないことにする。}。
+
+$x>0$と$x<0$のそれぞれでこのようにシュレーディンガー方程式を解くことができる。したがって、シュレーディンガー方程式(\ref{eq:sch})の解$\psi(x)$は次のように書けるはずである。
+
+\begin{align}
+    \psi(x) &= \begin{cases}
+        C_1 e^{ik_1x} + C_2 e^{-ik_1x}, E=\frac{\hbar^2k_1^2}{2m}  \qq{$(x<0)$} \\
+        C_3 e^{ik_2x} + C_4 e^{-ik_2x}, E=\frac{\hbar^2k_2^2}{2m}  \qq{$(x>0)$} \label{eq:sol1}
+    \end{cases}    
+\end{align}
+
+今、$x<0$と$x>0$と分けて考えたのはあくまで微分方程式を解く私たちの都合であって、本当は一本の微分方程式(\ref{eq:sch})であったことを思い出すと、$x<0$と$x>0$のそれぞれにおけるエネルギーは同じものでなくてはならないはずだから、$k_1 = k_2$がわかる。また、今デルタ関数型ポテンシャルに、平面波$e^{ikx}$が$x=-\infty$から入射してきている状況を考えている。したがって、$C_1=1$という境界条件を課すのが自然である\footnote{課さなくてもできる。これはあとで透過率や反射率の計算を楽にするために、入射波の振幅を1に規格化しているといってもよい。}。物理的に考えれば$x>0$においてはx軸正方向に進む粒子しか存在しないはずである。波数kの平面波の運動量は$\hbar k$で与えられることから、式\ref{eq:sol1}において$C_4=0$でなくてはならないことがわかる。結局、残った任意定数は$C_2, C_3$である。
+\begin{align}
+    \psi(x) &= \begin{cases}
+        e^{ikx} + C_2 e^{-ikx} \qq{$(x<0)$} \\
+        C_3 e^{ikx} \qq{$(x>0)$} \label{eq:sol2}
+    \end{cases} \\
+    E &= \frac{\hbar^2k^2}{2m}
+\end{align}
+
+
+\vspace{0.5cm}
+
+最後に、$C_2, C_3$を決めよう。以下では$C_2 = T, C_3 = R$と書くことにする。
+
+$T, R$は次の二つの要請から決まる。一つ目は、波動関数$\psi$は連続でなくてはならない\footnote{この正確な理由はよく知らないが、たぶん運動量演算子が微分演算子で書かれていることから、一回も微分できないような波動関数はいろいろまずいということだと思う。}。二つ目の要請は、波動関数の導関数に関する要請である。それを導くために、微分方程式\ref{eq:sch}を原点付近の微小区間$(-\epsilon, \epsilon)$で積分することを考えよう。
+
+\begin{align}
+    \int_{-\epsilon}^{\epsilon} \left\{-\frac{\hbar^2}{2m} \dv[2]{}{x} + \delta(x) \right\}\psi &= \int_{-\epsilon}^{\epsilon}E\psi \label{eq:connect1}
+\end{align}
+左辺を少し計算すると、
+
+\begin{align}
+    \int_{-\epsilon}^{\epsilon} \left\{-\frac{\hbar^2}{2m} \dv[2]{}{x} + \delta(x) \right\}\psi &= 
+        -\frac{\hbar^2}{2m} \eval{\dv{\psi}{x}}_{-\epsilon}^{\epsilon} + \psi(x=0) \label{eq:connect2}
+\end{align}
+式\ref{eq:connect1}に式\ref{eq:connect2}を代入し、$\epsilon \rightarrow 0$とすると、右辺が波動関数の連続性から0になることに注意すれば、
+
+\begin{align}
+    -\frac{\hbar^2}{2m} \eval{\dv{\psi}{x}}_{-0}^{+0} + \psi(x=0) = 0 \\
+    \frac{\hbar^2}{2m} \left(\dv{\psi}{x} (x=+0)-\dv{\psi}{x} (x=-0)\right) = \psi(x=0)
+\end{align}
+したがって、波動関数の導関数は、原点で$\psi(x=0)$だけ飛ばなくてはならないことがわかる。これが波動関数に対する第二の要請である。
+
+
+以上二つの要請を考慮して、式\ref{eq:sol2}における$C_1,C_2$、もとい$T,R$を決めればよい。
+
+すなわち、$T,R$が満たすべき条件は次のようになる。
+
+\begin{align}
+    e^{ikx} + R e^{-ikx} &= T e^{ikx} \qq{@x=0} \\
+    ik\left(e^{ikx} - R e^{-ikx} \right) &= ikT e^{ikx}+\frac{2m}{\hbar^2}\psi(x=0) \qq{@x=0}
+\end{align}
+これをT,Rの方程式として解けば答えが求まる。
+
+ここで、よく行われる計算上のテクニックとして、上の二式の代わりに、$\psi'(x)/\psi(x)$がx=0で連続であるという条件を課すというものがある。ここではそれを紹介しよう。すなわち、次のような条件を課すのである。
+
+\begin{align}
+    \frac{ik\left(e^{ikx} - R e^{-ikx} \right)}{ e^{ikx} + R e^{-ikx}} &= \frac{ikT e^{ikx}}{T e^{ikx}} \qq{@x=0} \\
+    \qq{$\therefore$} \frac{1 - R}{1 + R} &= 1
+\end{align}
+これを解けば直ちに、
+
+
+
+
+\end{document}
