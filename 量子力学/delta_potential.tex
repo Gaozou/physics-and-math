@@ -88,20 +88,34 @@ $T, R$は次の二つの要請から決まる。一つ目は、波動関数$\psi
 すなわち、$T,R$が満たすべき条件は次のようになる。
 
 \begin{align}
-    e^{ikx} + R e^{-ikx} &= T e^{ikx} \qq{@x=0} \\
+    \left(\psi(x=0) =\right) e^{ikx} + R e^{-ikx} &= T e^{ikx} \qq{@x=0} \\
     ik\left(e^{ikx} - R e^{-ikx} \right) &= ikT e^{ikx}+\frac{2m}{\hbar^2}\psi(x=0) \qq{@x=0}
 \end{align}
-これをT,Rの方程式として解けば答えが求まる。
+これをT,Rの方程式として解けば答えが求まる。式に$x=0$を代入して整理すれば、
+\begin{align}
+    1 + R &= T \\
+    1 - R &= T - \alpha T = (1-\alpha)T   
+\end{align}
+ただし、$\alpha = 2mi/\hbar^2k$とおいた。
 
-ここで、よく行われる計算上のテクニックとして、上の二式の代わりに、$\psi'(x)/\psi(x)$がx=0で連続であるという条件を課すというものがある。ここではそれを紹介しよう。すなわち、次のような条件を課すのである。
+これを解いて、
+\begin{align}
+    T &= \frac{2}{2-\alpha} \\
+    R &= T-1 = \frac{\alpha}{2-\alpha}
+\end{align}
+
+T,Rはそれぞれ、透過波と反射波の波動関数の振幅であった。したがって、透過率と反射率はこの絶対値の二乗に相当する\footnote{確率流密度の大きさを計算することによってこれは直接示すことができる。}。したがって、反射率と透過率はそれぞれ、
 
 \begin{align}
-    \frac{ik\left(e^{ikx} - R e^{-ikx} \right)}{ e^{ikx} + R e^{-ikx}} &= \frac{ikT e^{ikx}}{T e^{ikx}} \qq{@x=0} \\
-    \qq{$\therefore$} \frac{1 - R}{1 + R} &= 1
+    (透過率) &= |T|^2 = \frac{4}{|2-\alpha|^2}
+    = \frac{4}{4-4\Re{\alpha}+|\alpha|^2}\\
+    % &= \frac{4}{4+4m^2/\hbar^4k^2} \\
+    % &= \frac{1}{1+m^2/\hbar^4k^2} \\
+    &= \frac{\hbar^4k^2}{m^2+\hbar^4k^2} \\
+    (反射率) &= |R|^2 = \frac{|\alpha|^2}{|2-\alpha|^2} = \frac{4m^2/\hbar^4k^2}{4+4m^2/\hbar^4k^2} \\
+    &= \frac{m^2}{m^2+\hbar^4k^2}    
 \end{align}
-これを解けば直ちに、
 
-
-
+と計算できる。透過率と反射率を足すと確かに1になっていることも確かめられる。
 
 \end{document}
