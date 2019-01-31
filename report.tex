@@ -1,0 +1,83 @@
+\documentclass[uplatex,dvipdfmx]{jsarticle}
+
+\input{"preamble.tex"}
+
+\title{ギャップ方程式の数値計算の戦いの跡}
+\author{物理工学科3年 大西 由吾}
+
+\usepackage{listings,jlisting} %日本語のコメントアウトをする場合jlistingが必要
+%ここからソースコードの表示に関する設定
+\lstset{
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  commentstyle={\smallitshape},
+  keywordstyle={\small\bfseries},
+  ndkeywordstyle={\small},
+  stringstyle={\small\ttfamily},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  stepnumber=1,
+  numbersep=1zw,
+  lineskip=-0.5ex
+}
+
+\begin{document}
+\section{ギャップ方程式の数値計算用のコード}
+
+\begin{lstlisting}[caption=hoge,label=fuga]
+import numpy as np
+from numpy import linalg as la
+import matplotlib.pyplot as plt
+
+hbar = 1.05*10**(-34) # Js
+m = 9.10*10**(-31) #kg
+V = -10**(-20) #J
+k_B = 1.38*10**(-23) #J/K
+mu = 8.01*10**(-9) #J
+e_d = mu*10**(-12) #J
+
+
+
+def state_density(e):
+    return m**(3/2)/(np.pi**2 * hbar**3 * 2**0.5) * np.sqrt(e)
+
+def gap_eq(delta, T):
+    tmp = 0
+    for e in np.linspace(mu-e_d, mu+e_d, 100):
+        E_k = np.sqrt(e**2 + delta**2)
+        tmp += state_density(e)*delta/np.sqrt(E_k) * np.tanh(E_k/(2*k_B*T))
+    return -V/2 * tmp
+
+def calculate(initial_delta, T, alpha, tor):
+    current_delta = initial_delta
+    err_list = []
+    i=0
+    while True:
+        new_delta = current_delta*(1-alpha) + gap_eq(current_delta, T)*alpha
+        err = abs((current_delta-new_delta)/current_delta)
+        if err < tor:
+            break
+        current_delta = new_delta
+        err_list.append(err)
+    return current_delta, err, err_list
+
+delta_list = []
+T = np.linspace(1,100,10)
+
+for t in T:
+    print(t)
+    delta, err, err_list = calculate(1,t,0.1,10**(-3))
+    delta_list.append(delta)
+
+plt.plot(T, delta_list)
+plt.show()
+plt.savefig('gap_eq_result.png')
+\end{lstlisting}
+
+
+\end{document}
