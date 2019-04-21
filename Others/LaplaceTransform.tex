@@ -1,0 +1,87 @@
+\documentclass[uplatex,dvipdfmx]{jsarticle}
+
+\input{"preamble.tex"}
+
+\title{物理工学実験法のためのラプラス変換・フーリエ変換}
+\author{ガオゾウ}
+
+\begin{document}
+\maketitle
+
+\section{概要}
+某T大学K学部B理K学科では、物理工学実験法と称して電気回路などに関する実験を行う。その際、数学的に便利な道具としてしばしばラプラス変換・フーリエ変換を用いる。しかし、物理工学実験法の教科書は、これらを物理などに応用する際に暗黙のうちに仮定される基本的な事項が抜けている\footnote{しかもこれらを某学科の授業としてやることは一度もない。お隣のK数K学科の授業ではやるけど。}ことなどのために、非常にわかりにくいものになっている\footnote{特に電気的振動とフィードバック。こいつらはマジで許さん。}。
+
+本稿では、物理工学実験法でラプラス変換やフーリエ変換を用いるために必要最低限理解しておくべき事項を、筆者の復習も兼ねてまとめる。なお、筆者は数学科ではないので、当然数学的にはガバガバである。そのあたりは期待しないでほしい。
+
+\vspace{0.5cm}
+
+例のごとく、もし内容に間違いがあったら筆者まで連絡をお願いします。
+
+\section{導入}
+ここでは導入として減衰振動・強制振動の問題を例にとり、ラプラス変換・フーリエ変換の基本的な考え方を説明する。
+
+\subsection{例題：減衰振動}
+ばねにつながれた質点が、速度に比例する摩擦力を受けながら運動している一次元系を考える。質点の座標を$x(t)$とすると、質点の運動方程式は次のような形に書ける。
+\begin{align}
+	&m\dv[2]{x}{t} + 2m \gamma \dv{x}{t} + m\omega_0^2x = 0 \nonumber \\
+	&\dv[2]{x}{t} + 2\gamma \dv{x}{t} + \omega_0^2 x = 0 \label{eq:dumped_oscillation}	
+\end{align}
+ここで、$\gamma(>0)$は摩擦力を決める正の定数、$\omega_0(>0)$はばね定数から決まる固有振動数と呼ばれる量である。
+
+この微分方程式の解を求めたいのだが、その前にこの方程式の大事な特徴に触れておこう。この微分方程式は\emph{線形性}という重要な性質を持っている。微分方程式の線形性とは、ある二つの関数$f_1$と$f_2$がともに微分方程式を満たすとき、それらの線形結合$C_1 f_1 + C_2 f_2 \qq{($C_1$, $C_2$は定数)}$もまた微分方程式の解であるという性質である\footnote{物理の言葉でいえば、重ね合わせの原理が成り立つということである。}。微分方程式\eqref{eq:dumped_oscillation}が線形性を持っていることは容易に確かめられる。
+
+さて、この微分方程式の解を求めることを考えよう。
+このような形の微分方程式を求めるやり方はいろいろあるとは思うが、最も素朴なやり方として、始めから解の形をある程度仮定してしまうという方法をとることにしよう。
+
+式\eqref{eq:dumped_oscillation}は、$x(t)$の一階微分や二階微分の線形結合が$x(t)$の定数倍になる、という式である。これを実現する最も簡単な$x(t)$は、指数関数である。そこで、$x(t)$として、$x(t)=e^{st}\qq{($s$は定数)}$という形の解を仮定しよう。これを式\eqref{eq:dumped_oscillation}に代入すると、
+\begin{align}
+	&(s^2 + 2\gamma s + \omega_0^2) e^{st} = 0 \nonumber \\
+	\therefore \quad & s^2+2\gamma s + \omega_0^2 = 0 \label{eq:dumped_laplace}
+\end{align}
+このように$s$に関する条件が得られる。したがって、式\eqref{eq:dumped_laplace}を満たす$s$を用いれば、$x(t)=e^{st}$は微分方程式\eqref{eq:dumped_oscillation}の解になる。実際に式\eqref{eq:dumped_laplace}の解を求めてみると、
+\begin{align}
+	s_{\pm} &= -\gamma \pm \sqrt{\gamma^2 - \omega_0^2} \label{eq:dumped_solution}	
+\end{align}
+となる。
+
+さて、式\eqref{eq:dumped_laplace}は$s$に関する二次方程式であるから、解\eqref{eq:dumped_solution}は虚数である可能性がある。以下、式\eqref{eq:dumped_laplace}の判別式$D=\gamma^2-\omega_0^2$の値に基づいて場合分けしてみよう。
+
+\subsubsection{$D>0$のとき}
+式\eqref{eq:dumped_laplace}の解は式\eqref{eq:dumped_solution}である。したがって、微分方程式\eqref{eq:dumped_oscillation}の解として、$x(t) = e^{s_+t}, e^{s_-t}$がとれる。さらに、式\eqref{eq:dumped_oscillation}は線形性を持っていたから、これら二つの解の線形結合もまた解である。したがって、式\eqref{eq:dumped_oscillation}の一般解は、
+\begin{align}
+	x(t) = C_1e^{s_+t} + C_2e^{s_-t} \qq{($C_1, C_2$は任意の定数)}
+\end{align}
+である。$s_\pm$はいずれも負の実数であるから、$x(t)$は$t$が大きくなると指数関数的に0に減衰していく。これを過減衰という。
+
+\subsubsection{$D=0$のとき}
+式\eqref{eq:dumped_laplace}の解は重解となる。したがって、解\eqref{eq:dumped_solution}は$s=-\gamma$のみとなる。このとき、$x(t)=e^{-\gamma t}$はもちろん解であるが、これ一つだけでは微分方程式の線形性を用いても任意定数を二つ持つ一般解を構成できない。そこで、さらに解として$x(t)=C(t)e^{-\gamma t}$を仮定し、$C(t)$に関する条件を求める。詳細は割愛するが、このとき$\dv[2]{t}C(t) = 0$という条件が得られる。よって、$C(t) = C_1t + C_2 \qq{($C_1, C_2$は任意定数)}$として$x(t) = (C_1t + C_2)e^{-\gamma t}$が一般解となる。
+
+\subsubsection{$D<0$のとき}
+このとき式\eqref{eq:dumped_laplace}の解は虚数となる。そこで、解$s_\pm$を次のように書き換えよう。
+\begin{align}
+	s_{\pm} = -\gamma \pm i\omega \qc{\omega = \sqrt{\omega_0^2 - \gamma^2}}	
+\end{align}
+このとき、微分方程式\eqref{eq:dumped_oscillation}の一般解は、やはり微分方程式の線形性を用いれば次のように書ける。
+\begin{align}
+	x(t) &= C_1 e^{s_+t} + C_2 e^{s_-t} \nonumber \\
+		&= e^{-\gamma t}(C_1 e^{i\omega t} + C_2 e^{-i\omega t}) \label{eq:dumped_solution_Dneg}
+\end{align}
+ところで、オイラーの公式によれば指数関数の肩に虚数が乗っかっているものは三角関数で表すことができる。例えば
+\begin{align}
+	e^{i\omega t} = \cos{\omega t} + i\sin{\omega t}
+\end{align}
+したがって、\eqref{eq:dumped_solution_Dneg}の括弧内は三角関数のように振動する。それに全体として$e^{-\gamma t}$がかかっているから、解\eqref{eq:dumped_solution_Dneg}は振幅が指数関数的に減衰しながら振動する、という振る舞いを表していることがわかる。
+
+\subsubsection{注意:複素数の解}
+$D<0$の場合の解\eqref{eq:dumped_solution_Dneg}は一般に複素数である。したがって、物理の問題としての微分方程式\eqref{eq:dumped_oscillation}の解としては本来不適切である。しかし、式\eqref{eq:dumped_solution_Dneg}の実部のみをとった関数も微分方程式\eqref{eq:dumped_oscillation}の解となる。なぜなら、式\eqref{eq:dumped_oscillation}の左辺の演算の中で、実部と虚部を混ぜるような演算はどこにもないからだ。微分を施したときも、$e^{i\omega t}=\cos{\omega t} + i\sin{\omega t}$の左辺を微分すると肩から$i$が下りてくるように思えるが、それは右辺で見れば微分によって$\cos$と$\sin$が見かけ上入れ替わっているだけであって、実部のみ、虚部のみでそれぞれ微分しても同じ結果が得られる。すなわち、式\eqref{eq:dumped_oscillation}の左辺の演算において、実部と虚部を完全に独立に計算してもまったく問題は生じないのである。
+
+したがって、物理的な一般解として採用すべきは、式\eqref{eq:dumped_solution_Dneg}の実部である。
+
+さらにもう一つ注意が必要なのは、解\eqref{eq:dumped_solution_Dneg}において、$C_1, C_2$は複素数であってもよいということである。これがどのような意味を持つのかを見るために、$C_1 = |C_1|e^{i\theta}$と書こう。また簡単のために$C_2 = 0$とする。このとき、式\eqref{eq:dumped_solution_Dneg}の実部は
+\begin{align}
+	x(t) &= \Re{e^{-\gamma t}C_1 e^{i\omega t}} \nonumber \\
+		&= e^{-\gamma t}|C_1|\Re{e^{i(\omega t + \theta)}} \nonumber \\
+		&= |C_1| e^{-\gamma t} \cos(\omega t + \theta)
+\end{align}
+したがって、$C_1$の偏角$\theta$は$x(t)$の位相に対応していることがわかる。
+\end{document}
