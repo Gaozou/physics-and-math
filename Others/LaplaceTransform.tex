@@ -9,16 +9,16 @@
 \maketitle
 
 \section{概要}
-某T大学K学部B理K学科では、物理工学実験法と称して電気回路などに関する実験を行う。その際、数学的に便利な道具としてしばしばラプラス変換・フーリエ変換を用いる。しかし、物理工学実験法の教科書は、これらを物理などに応用する際に暗黙のうちに仮定される基本的な事項が抜けている\footnote{しかもこれらを某学科の授業としてやることは一度もない。お隣のK数K学科の授業ではやるけど。}ことなどのために、非常にわかりにくいものになっている\footnote{特に電気的振動とフィードバック。こいつらはマジで許さん。}。
+某T大学K学部B理K学科では、物理工学実験法と称して電気回路などに関する実験を行う。その際、数学的に便利な道具としてしばしばラプラス変換・フーリエ変換を用いる。しかし、物理工学実験法の教科書は、これらを物理などに応用する際に暗黙のうちに仮定される基本的な事項が抜けている\footnote{しかもこれらを某学科の授業としてやることは一度もない。お隣のK数K学科の授業ではやるけど。}ことなどのために、非常にわかりにくいものになっている\footnote{特に電気的振動とフィードバック。お前らはマジで許さん。}。
 
 本稿では、物理工学実験法でラプラス変換やフーリエ変換を用いるために必要最低限理解しておくべき事項を、筆者の復習も兼ねてまとめる。なお、筆者は数学科ではないので、当然数学的にはガバガバである。そのあたりは期待しないでほしい。
 
 \vspace{0.5cm}
 
-例のごとく、もし内容に間違いがあったら筆者まで連絡をお願いします。
+例のごとく、もし内容に間違いがあったら筆者(@97gaozou)まで連絡をお願いします。
 
 \section{導入}
-ここでは導入として減衰振動・強制振動の問題を例にとり、ラプラス変換・フーリエ変換の基本的な考え方を説明する。
+ここでは導入として減衰振動・強制振動の問題を例にとり、ラプラス変換・フーリエ変換の基本的な考え方を説明する。減衰振動・強制振動の問題を解いたことがある人は飛ばして次の節に進んでもよい。
 
 \subsection{例題：減衰振動}
 ばねにつながれた質点が、速度に比例する摩擦力を受けながら運動している一次元系を考える。質点の座標を$x(t)$とすると、質点の運動方程式は次のような形に書ける。
@@ -38,7 +38,7 @@
 	&(s^2 + 2\gamma s + \omega_0^2) e^{st} = 0 \nonumber \\
 	\therefore \quad & s^2+2\gamma s + \omega_0^2 = 0 \label{eq:dumped_laplace}
 \end{align}
-このように$s$に関する条件が得られる。したがって、式\eqref{eq:dumped_laplace}を満たす$s$を用いれば、$x(t)=e^{st}$は微分方程式\eqref{eq:dumped_oscillation}の解になる。実際に式\eqref{eq:dumped_laplace}の解を求めてみると、
+このように$s$に関する条件が得られる。ここで、\emph{解として指数関数を仮定したことで、微分方程式が$s$に関する代数方程式に変わったことに注意しよう。}したがって、式\eqref{eq:dumped_laplace}を満たす$s$を用いれば、$x(t)=e^{st}$は微分方程式\eqref{eq:dumped_oscillation}の解になる。実際に式\eqref{eq:dumped_laplace}の解を求めてみると、
 \begin{align}
 	s_{\pm} &= -\gamma \pm \sqrt{\gamma^2 - \omega_0^2} \label{eq:dumped_solution}	
 \end{align}
@@ -72,16 +72,49 @@
 \end{align}
 したがって、\eqref{eq:dumped_solution_Dneg}の括弧内は三角関数のように振動する。それに全体として$e^{-\gamma t}$がかかっているから、解\eqref{eq:dumped_solution_Dneg}は振幅が指数関数的に減衰しながら振動する、という振る舞いを表していることがわかる。
 
-\subsubsection{注意:複素数の解}
-$D<0$の場合の解\eqref{eq:dumped_solution_Dneg}は一般に複素数である。したがって、物理の問題としての微分方程式\eqref{eq:dumped_oscillation}の解としては本来不適切である。しかし、式\eqref{eq:dumped_solution_Dneg}の実部のみをとった関数も微分方程式\eqref{eq:dumped_oscillation}の解となる。なぜなら、式\eqref{eq:dumped_oscillation}の左辺の演算の中で、実部と虚部を混ぜるような演算はどこにもないからだ。微分を施したときも、$e^{i\omega t}=\cos{\omega t} + i\sin{\omega t}$の左辺を微分すると肩から$i$が下りてくるように思えるが、それは右辺で見れば微分によって$\cos$と$\sin$が見かけ上入れ替わっているだけであって、実部のみ、虚部のみでそれぞれ微分しても同じ結果が得られる。すなわち、式\eqref{eq:dumped_oscillation}の左辺の演算において、実部と虚部を完全に独立に計算してもまったく問題は生じないのである。
+\subsubsection{注意:複素数の解} \label{sec:complex_solution}
+$D<0$の場合の解\eqref{eq:dumped_solution_Dneg}は一般に複素数である。したがって、物理の問題としての微分方程式\eqref{eq:dumped_oscillation}の解としては本来不適切である。しかし、実は式\eqref{eq:dumped_solution_Dneg}の実部のみをとった関数も微分方程式\eqref{eq:dumped_oscillation}の解となる。なぜなら、式\eqref{eq:dumped_oscillation}の左辺の演算の中で、実部と虚部を混ぜるような演算はどこにもないからだ。微分を施したときも、$e^{i\omega t}=\cos{\omega t} + i\sin{\omega t}$の左辺を微分すると肩から$i$が下りてくるように思えるが、それは右辺で見れば微分によって$\cos$と$\sin$が見かけ上入れ替わっているだけであって、実部のみ、虚部のみでそれぞれ微分しても同じ結果が得られる。すなわち、式\eqref{eq:dumped_oscillation}の左辺の演算において、実部と虚部を完全に独立に計算してもまったく問題は生じないのである。
 
 したがって、物理的な一般解として採用すべきは、式\eqref{eq:dumped_solution_Dneg}の実部である。
 
-さらにもう一つ注意が必要なのは、解\eqref{eq:dumped_solution_Dneg}において、$C_1, C_2$は複素数であってもよいということである。これがどのような意味を持つのかを見るために、$C_1 = |C_1|e^{i\theta}$と書こう。また簡単のために$C_2 = 0$とする。このとき、式\eqref{eq:dumped_solution_Dneg}の実部は
+さらにもう一つ注意が必要なのは、解\eqref{eq:dumped_solution_Dneg}において、$C_1, C_2$は複素数であってもよいということである。これがどのような意味を持つのかを見るために、$C_1 = |C_1|e^{i\theta}$と書こう。また簡単のために$C_2 = 0$とする\footnote{$C_2 \neq 0$の場合でも、実部のみとった$x(t)$はやはり式\eqref{eq:phase}のような形に書くことができる。}。このとき、式\eqref{eq:dumped_solution_Dneg}の実部は
 \begin{align}
 	x(t) &= \Re{e^{-\gamma t}C_1 e^{i\omega t}} \nonumber \\
 		&= e^{-\gamma t}|C_1|\Re{e^{i(\omega t + \theta)}} \nonumber \\
-		&= |C_1| e^{-\gamma t} \cos(\omega t + \theta)
+		&= |C_1| e^{-\gamma t} \cos(\omega t + \theta) \label{eq:phase}
 \end{align}
-したがって、$C_1$の偏角$\theta$は$x(t)$の位相に対応していることがわかる。
+したがって、$C_1$の偏角$\theta$は$x(t)$の位相に、絶対値$|C_1|$は$x(t)$の（初期）振幅に対応していることがわかる。
+
+このように、複素数の解が数学的には出てくるが、物理的に意味を持つのはその実部のみであると考えてよい。ただし、数学的な処理をする際は、複素数のまま扱った方が何かと都合のよいことが多い。したがって、物理でこのような振動の問題を扱う場合には、「数式上では複素数で問題を解くが、物理量として解釈するときはその実部のみをとる」という暗黙の了解のもとしばしば式変形が行われる。
+
+\subsection{例題：強制振動}
+続いて、今度は前節の一次元系にさらに外力$F(t)$が加わっている場合を考えよう。この外力は、$F(t)=F\cos (\omega t+\theta)$のように周期的であるとする。このとき、質点の運動方程式は次のように書ける。
+
+\begin{align}
+	\dv[2]{x}{t} + 2\gamma \dv{x}{t} + \omega_0^2 x = F\cos(\omega t+\theta) \label{eq:forced_oscillation}	
+\end{align}
+
+減衰振動の時の微分方程式\eqref{eq:dumped_oscillation}と比べると、右辺が$0$でなく外力$F\cos(\omega t + \theta)$である点が異なる\footnote{減衰振動の式\eqref{eq:dumped_oscillation}は線形性を持っていたが、今回の微分方程式\eqref{eq:dumped_oscillation}は厳密には線形性は持たない。しかし、定関数ぶん線形微分方程式と異なるだけなので、式\eqref{eq:forced_oscillation}も線形微分方程式と呼ばれる。式\eqref{eq:dumped_oscillation}のような「真の」線形微分方程式は特に斉次微分方程式と呼ばれ、式\eqref{eq:forced_oscillation}のような線形微分方程式は非斉次線形微分方程式と呼ばれる。}。このような非斉次線形微分方程式は、一つだけ解$g(t)$\footnote{特解と呼ばれる。}を見つければ、一般解は対応する斉次線形微分方程式の一般解$C_1f_1(t)+C_2f_2(t)$を用いて、
+\begin{align}
+	f(t) &= g(t) + C_1f_1(t)+C_2f_2(t)
+\end{align}
+と書ける\footnote{証明は、$f(t)-g(t)$が斉次微分方程式を満たすことを見れば容易。}から、一つ特解を見つけることを考えよう。
+
+さて、特解を探す前に、式\eqref{eq:forced_oscillation}をもう少し扱いやすい形に変形しておこう。節\ref{sec:complex_solution}で述べたように、物理の問題を扱ううえで重要なのは実部のみであり、また式\eqref{eq:forced_oscillation}においても式\eqref{eq:dumped_oscillation}と同様に実部と虚部が混ざるような演算はない。したがって、\eqref{eq:forced_oscillation}式の右辺に純虚数を付け加えた微分方程式を解いても、その解の実部は\eqref{eq:forced_oscillation}の解と同じである。そこで、式を扱いやすくするために、\eqref{eq:forced_oscillation}の右辺を置き換えた
+\begin{align}
+	\dv[2]{x}{t} + 2\gamma \dv{x}{t} + \omega_0^2 x = Fe^{i\omega t} \label{eq:forced_oscillation_c}		
+\end{align}
+の解を考えることにする。ここで、$F$は複素数である。式\eqref{eq:forced_oscillation}における外力の位相$\theta$の自由度は、$F$の偏角の自由度として反映されている。
+
+特解を探そう。\eqref{eq:forced_oscillation_c}は$x(t)$を微分したものを足し合わせると、$e^i\omega t$に比例するという式である。そこで、$x(t)=Xe^{i\omega t} \qq{($X$は複素数)}$を仮定しよう。すると式\eqref{eq:forced_oscillation_c}から
+\begin{align}
+	(-\omega^2 + 2i\gamma\omega+\omega_0^2)X = F \nonumber \\
+	X = \frac{F}{-\omega^2 + 2i\gamma\omega+\omega_0^2}
+\end{align}
+が得られる。したがって、特解$x(t)$として
+\begin{align}
+	x(t) &= \frac{F}{-\omega^2 + 2i\gamma\omega+\omega_0^2} e^{i\omega t} \nonumber \\
+	&= F\chi(\omega) e^{i\omega t} \qc \chi(\omega)=\frac{1}{-\omega^2 + 2i\gamma\omega+\omega_0^2} \label{eq:forced_oscillation_solution}
+\end{align}
+が得られる。もちろん、物理的に意味があるのはこのうち実部のみである。ここで重要なのは、式\eqref{eq:forced_oscillation_solution}中でt依存性を持っているのは$e^{i\omega t}$の部分のみであるから、$x(t)$も外力と同じ$\omega$の振動数をもつ振動になっているということ、そして、その振幅と位相がその前の係数$\chi(\omega)$によって決まっているということである。実際、
 \end{document}
