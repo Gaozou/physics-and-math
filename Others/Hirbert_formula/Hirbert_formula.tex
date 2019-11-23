@@ -33,7 +33,7 @@
 
 \begin{align}
 	\int_{-\infty}^{\infty} \dd{\omega} \pv{\frac{\phi(\omega)}{\omega}} &= \lim_{R\to\infty}\int_{C_1} \dd{z} \frac{\phi(z)}{z} + \lim_{\epsilon\to +0}\qty[\int_{C_i} \dd{z} \frac{\phi(z)}{z}] \pm i\pi \Res_{z=0}(\frac{\phi(z)}{z}) \\
-	&= \lim_{R\to\infty, \epsilon\to +0}\int_{C_1+C_i} \dd{z} \qty( \frac{\phi(z)}{z} + \frac{\phi(z)}{z} \pm i\pi \delta(z)\phi(z) ) \\
+	&= \lim_{R\to\infty, \epsilon\to +0}\int_{C_1+C_i} \dd{z} \qty( \frac{\phi(z)}{z} \pm i\pi \delta(z)\phi(z) ) \\
 	&= \lim_{\eta \to +0}\int_{-\infty}^{\infty} \dd{\omega} \qty(\frac{\phi(\omega)}{\omega\pm i\eta}\pm i\pi\delta(\omega)\phi(z) ) \\
 	&= \lim_{\eta \to +0}\int_{-\infty}^{\infty} \dd{\omega} \phi(\omega)\qty(\frac{1}{\omega\pm i\eta}\pm i\pi\delta(\omega) )
 \end{align}
