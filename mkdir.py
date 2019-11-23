@@ -3,8 +3,8 @@ import os
 from pathlib import Path
 import shutil
 
-TEMPLATE_PATH = Path(r"C:\Users\yugo9\Documents\Scripts\TeX Scripts\数物メモ\template.tex")
-PREAMBLE_PATH = Path(r"C:\Users\yugo9\Documents\Scripts\TeX Scripts\数物メモ\preamble.tex")
+TEMPLATE_PATH = Path(r"template.tex")
+PREAMBLE_PATH = Path(r"preamble.tex")
 
 def main():
 	if len(sys.argv)<2:
