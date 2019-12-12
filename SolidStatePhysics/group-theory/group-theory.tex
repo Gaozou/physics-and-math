@@ -335,13 +335,15 @@
 $O_h$の元について、5つのd軌道$d_{xy}, d_{yz}, d_{zx}, d_{x^2-y^2}, d_{2z^2-x^2-y^2}$がどのような表現（5×5行列）を張るかを考え、その指標を求めてみると表\ref{tab:character_table}のようになります。
 
 
-\begin{table}[]
+\begin{table}[htbp]
+	\centering
 	\begin{tabular}{lllllllllll}
-	{\ul }   & {\ul $E$} & {\ul $6C_4$} & {\ul $3C_4^2$} & {\ul $6C_2'$} & {\ul $8C_3$} & {\ul $I$} & {\ul $6IC_4$} & {\ul $3\sigma_h$} & {\ul $6\sigma_d$} & {\ul $8IC_3$} \\
-	d軌道      & 5         & -1           & 1              & 1             & -1           & 5         & -1            & 1                 & 1                 & -1            \\
-	$T_{2g}$ & 3         & -1           & -1             & 1             & 0            & 3         & -1            & -1                & 1                 & 0             \\
-	$E_g$    & 2         & 0            & 2              & 0             & -1           & 2         & 0             & 2                 & 0                 & -1           
+			 & $E$ & $6C_4$ & $3C_4^2$ & $6C_2'$ & $8C_3$ & $I$ & $6IC_4$ & $3\sigma_h$ & $6\sigma_d$ & $8IC_3$ \\ \hline
+	d軌道      & 5   & -1     & 1        & 1       & -1     & 5   & -1      & 1           & 1           & -1      \\
+	$T_{2g}$ & 3   & -1     & -1       & 1       & 0      & 3   & -1      & -1          & 1           & 0       \\
+	$E_g$    & 2   & 0      & 2        & 0       & -1     & 2   & 0       & 2           & 0           & -1     
 	\end{tabular}
+	\caption{点群$O_h$の指標表}
 	\label{tab:character_table}
 \end{table}
 
@@ -379,4 +381,8 @@ $O_h$の元について、5つのd軌道$d_{xy}, d_{yz}, d_{zx}, d_{x^2-y^2}, d_
 
 まじめに構想を練らずにノープランでそれなりに長いものを書き始めるとこういう一体だれが読むのかという駄文ができることがよくわかりました。反省です。群の表現論を用いると、比較的簡単な計算で意味のある結果を引き出せるということが少しでも伝わっていたら幸いです。
 
+\begin{thebibliography}{9}
+	\bibitem{ouyougunron} 犬井鉄郎、田辺行人、小野寺嘉孝　応用群論 -群表現と物理学-
+	\bibitem{WatanabeKotaibuturi} 渡辺悠樹 　空間群の表現論とバンド構造のトポロジー　（固体物理 誌上セミナー）　
+\end{thebibliography}
 \end{document}
