@@ -4,21 +4,61 @@
 
 \title{Tight-Binding ModelにおけるPeierls位相}
 \author{ガオゾウ}
+\date{\today}
+
+\newcommand{\ttilde}{\tilde{t}}
 
 \begin{document}
 \maketitle
 \section{概要}
-磁場下の一電子ハミルトニアンにおいては、ふつう運動量演算子$\vb*{p}$を$\vb*{p}-\frac{e}{c}\vb*{A}$で置き換えることによって磁場の効果を取り入れる。これはまあいいのだけれど、これと同じことをTight-Binding modelにおいては、磁場の効果を電子のホッピングの際の係数に位相因子をつけることで取り入れる。この手続きのことをPeierls substitutionとかこの位相のことをPeierls phaseなどと呼ぶらしい。
-しかし、このTight-Binding ModelにおけるPeierls位相の導出が、少なくとも日本語ではあまり出てこなかった。唯一出てきたそれらしいものは\cite{NagaiNote}のみだったし、ちょっとこれだけでは個人的にあまり納得がいかなかったので、色々調べて書いてみた。本当にこれで正しいのかはわかりません。ちなみにPeierlsの原著論文見たらドイツ語で死にました。
+磁場下の一電子ハミルトニアンにおいては、ふつう運動量演算子$\vb*{p}$を$\vb*{p}-\frac{e}{c}\vb*{A}$で置き換えることによって磁場の効果を取り入れる。これはまあいいのだけれど、Tight-Binding modelにおいては、磁場の効果を電子のホッピング係数に位相因子をつけることで取り入れる。この手続きのことをPeierls substitutionとかこの位相のことをPeierls phaseなどと呼ぶらしい。
+しかし、このTight-Binding ModelにおけるPeierls位相の導出が、少なくとも日本語ではあまり出てこなかった。唯一出てきたそれらしいものは\cite{NagaiNote}のみだったし、英語で調べて出てきたものを含めても、ちょっと個人的にあまり納得がいかなかったので、色々調べて書いてみた。本当にこれで正しいのかはわかりません。ちなみにPeierlsの原著論文見たらドイツ語で死にました。
 
 \section{Tight-Binding Model}
 まず初めにTight-Binding Modelを、孤立原子における波動関数から始めてきちんと定義する。以下では簡単のため、結晶を構成する原子は一種類のみとし、また考える孤立原子の原子軌道は一種類のみとするが、これらの拡張はほとんど自明である（添え字を適当につけなおせばよい）。
 
-考える孤立原子の位置を$\vb*{x}_i$、原子軌道の波動関数を$\phi(\vb*{x}-\vb*{x}_i)$と書き、対応する状態ベクトルを$\ket*{i}$とかく。$i$番目の
+考える孤立原子の位置を$\vb*{x}_i$、原子軌道の波動関数を$\phi(\vb*{x}-\vb*{x}_i)$と書き、対応する状態ベクトルを$\ket*{i}$とかく。$i$番目の原子による電子の感じるポテンシャルを$V_i$とすれば、$\vb*{x}_i$は次のようなハミルトニアン$H_i$の固有状態である。
+\begin{align}
+	H_i = \frac{p^2}{2m} + V_i(\vb*{x}) = -\frac{\hbar^2}{2m}\nabla^2 + V_i(\vb*{x})
+\end{align}
+したがって次が成り立つ。
+\begin{align}
+	H_i\ket{i} = \varepsilon\ket{i}
+\end{align}
+ここで$\varepsilon$は孤立原子における原子軌道の固有エネルギーである。
+結晶における全ハミルトニアンは、全原子のポテンシャルを含めたハミルトニアンで\footnote{正確には全原子のポテンシャルを足し合わせるだけでは不十分で、電子間のクーロン相互作用を考慮する必要がある。}
+\begin{align}
+	H = \frac{p^2}{2m} + \sum_i V_i(\vb*{x}) \label{eq:Hamiltonian}
+\end{align}
+となる。究極的な目標はこのハミルトニアンの固有状態を求めることである。
 
+Tight-Binding modelにおいては、原子軌道が強く局在していると仮定することでこのハミルトニアンを近似する。具体的には、次のような仮定をする。
+\begin{enumerate}
+	\item 各原子軌道の重なりは無視できる。\begin{align}
+		\braket{i}{j} =  \delta_{ij}
+	\end{align}
+	\item 各原子の波動関数$\phi_i, \phi_j$や原子のポテンシャル$V_k$は、それぞれ原子$i,j,k$の十分近くでのみ非ゼロの値を持つ。したがって、次のような$V_k$の行列要素は、原子$i,j,k$が十分近い時のみ有限の値を持つ。\begin{align}
+		\matrixel{i}{V_k}{j} = \int \phi_i^*(\vb*{x}) V_k(\vb*{x}) \phi_j(\vb*{x}) \dd[3]{x}
+	\end{align}
+\end{enumerate}
+このとき、ハミルトニアン$H$の行列要素$\matrixel{i}{H}{j}$は原子$i,j$が十分近いときのみ有限の値を持つ。この値を$t_{ij}$と置けば、ハミルトニアンは
+\begin{align}
+	H = \sum_{i,j} \ket{i}t_{ij}\bra{j}
+\end{align}
+あるいは、$c^\dagger_i\ket{0} = \ket{i} \qq{($\ket{0}$は電子が存在しない状態に対応するケットベクトル)}$を満たすような生成演算子$c^\dagger_i$や消滅演算子$c_i$を用いれば、
+\begin{align}
+	H = \sum_{i,j} t_{ij} c^\dagger_i c_j
+\end{align}
+と表すことができる。これが通常のTight-Binding Modelである。
 
-
-
+\section{Peierls位相}
+前節で定義したTight-Binding Modelに対し、ベクトルポテンシャル$\vb*{A}$の効果を取り入れることを考える。すなわち、ハミルトニアン（式\eqref{eq:Hamiltonian}）に対して$\vb*{p}$を$\vb*{p}-\frac{e}{c}\vb*{A}$に置き換えたとき、どのように行列要素$t_{ij}$が変化するかを考える。ベクトルポテンシャルがあるときの行列要素$\matrixel{i}{H}{j}$を$\ttilde_{ij}$と書くことにすると、
+\begin{align}
+	\ttilde_{ij} &= \int \phi^*_i H \phi_j \dd[3]x \\
+	&= \int \phi^*_i \qty[\frac{1}{2m}\qty(\vb*{p}-\frac{e}{c}\vb*{A})^2 + \sum_k V_k] \phi_j \dd[3]x
+\end{align}
+となる。
+これを書き換えることで
 
 
 
