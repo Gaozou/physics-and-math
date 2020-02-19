@@ -1,0 +1,71 @@
+%パッケージ導入
+
+%\usepackage[dvipdfm,
+%  colorlinks=false,
+%  bookmarks=true,
+%  bookmarksnumbered=false,
+%  pdfborder={0 0 0},
+%  bookmarkstype=toc]{hyperref}	%目次リンク化
+%\AtBeginDvi{\special{pdf:tounicode EUC-UCS2}}	%目次リンク化
+\usepackage{amsmath,amssymb,ascmac,fancybox}	%基本パッケージ
+\usepackage[dvipdfmx]{color}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{url}
+\usepackage{siunitx}
+\usepackage{layout}		%layout確認用
+\usepackage{tcolorbox}		%tcolorboxとその拡張用パッケージ
+	\tcbuselibrary{raster,skins}	
+	\tcbuselibrary{xparse}
+	\tcbuselibrary{breakable}
+\usepackage{fancyhdr}		%ページスタイル用パッケージ
+\usepackage{subcaption}		%並べた図に異なる見出しを付ける為のパッケージ
+%\usepackage{theorem}		%定義、定理、補題環境
+\usepackage{bm}
+\usepackage{physics}
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs=true}
+\usepackage{cite}
+\usepackage[dvipdfmx]{hyperref}
+\usepackage{pxjahyper}
+%パッケージ導入終わり
+
+
+%ページスタイル宣言
+%\pagestyle{fancy}
+
+%ページレイアウト
+%\setlength{\textwidth}{\fullwidth}
+%\setlength{\evensidemargin}{\oddsidemargin}
+
+%graphicフォルダ指定
+\graphicspath{{graphics/}}
+
+%各種マクロ設定
+%各種コマンド
+\newtcolorbox{nonframe}[1]{breakable,top = 0.5mm, colframe = white, colback = white, colbacktitle = white,coltitle = black,fonttitle = \bfseries\sffamily,title = #1}	%枠なし、タイトル太字ゴシック
+%\newcommand{\Vect}[1]{\mbox{\boldmath $#1$}}		%太字斜体ベクトル
+\newcommand{\emp}[1]{\textcolor{red}{\textgt{\bf #1}}}	%太字、赤色
+\newcommand{\ham}{\hat{H}}	%ハミルトニアン演算子
+\newcommand{\gtb}[1]{\textgt{\textbf{#1}}}	%太字ゴシック
+\newcommand{\ex}{\underline{\gtb{例}}}		%「例」の字　太字と下線付き
+\newcommand{\refer}[1]{(\ref{#1})}		%括弧つき式番号等参照
+\newcommand{\partdif}[2]{\frac{\partial #1}{\partial #2}}	%偏微分 \pardif{a}{b}でaをbで偏微分した表記になる
+\newcommand{\substi}[2]{\left.#1\right|_{#2}}		%縦線代入
+\newcommand{\Vector}[3]{\left( \begin{array}{c} #1 \\ #2 \\ #3 \end{array} \right)}	%ベクトル成分表示
+
+
+%各種環境
+\newenvironment{column}[1]{\begin{boxnote}{\large \textbf{\textgt{コラム　#1}}} \vspace{3pt} \\}{\end{boxnote}}	%コラムボックス環境
+\newenvironment{matome}{\begin{tcolorbox}[enhanced,title= \gtb{まとめ},		
+  	attach boxed title to top left={xshift=3mm, yshift*=-\tcboxedtitleheight/2}]}
+{\end{tcolorbox}}												%まとめボックス環境
+
+%定理環境設定
+%\theoremstyle{break}			%定理スタイル指定
+%\newtheorem{theo}{定理}[chapter]	%定理環境
+%\newtheorem{defi}{定義}[chapter]	%定義環境
+%\newtheorem{lemm}{補題}[chapter]	%補題環境
+%\newenvironment{defbox}[1]{\begin{tcolorbox}[enhanced,breakable] \begin{defi}[#1]}{\end{defi} \end{tcolorbox}}		%定義ボックス
+%\newenvironment{thmbox}[1]{\begin{tcolorbox}[enhanced,breakable] \begin{theo}[#1]}{\end{theo} \end{tcolorbox}}		%定理ボックス
+%\newenvironment{lembox}[1]{\begin{tcolorbox}[enhanced,breakable] \begin{lemm}[#1]}{\end{lemm} \end{tcolorbox}}	%補題ボックス
+
