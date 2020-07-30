@@ -6,20 +6,22 @@
 \author{ガオゾウ}
 \date{\today}
 
+\renewcommand{\vec}{\vb*}
 \newcommand{\ttilde}{\tilde{t}}
+\newcommand{\tphi}{\tilde{\phi}}
 
 \begin{document}
 \maketitle
 \section{概要}
-磁場下の一電子ハミルトニアンにおいては、ふつう運動量演算子$\vb*{p}$を$\vb*{p}-\frac{e}{c}\vb*{A}$で置き換えることによって磁場の効果を取り入れる。これはまあいいのだけれど、Tight-Binding modelにおいては、磁場の効果を電子のホッピング係数に位相因子をつけることで取り入れる。この手続きのことをPeierls substitutionとかこの位相のことをPeierls phaseなどと呼ぶらしい。
+磁場下の一電子ハミルトニアンにおいては、ふつう運動量演算子$\vec{p}$を$\vec{p}-\frac{e}{c}\vec{A}$で置き換えることによって磁場の効果を取り入れる。これはまあいいのだけれど、Tight-Binding modelにおいては、磁場の効果を電子のホッピング係数に位相因子をつけることで取り入れる。この手続きのことをPeierls substitutionとかこの位相のことをPeierls phaseなどと呼ぶらしい。
 しかし、このTight-Binding ModelにおけるPeierls位相の導出が、少なくとも日本語ではあまり出てこなかった。唯一出てきたそれらしいものは\cite{NagaiNote}のみだったし、英語で調べて出てきたものを含めても、ちょっと個人的にあまり納得がいかなかったので、色々調べて書いてみた。本当にこれで正しいのかはわかりません。ちなみにPeierlsの原著論文見たらドイツ語で死にました。
 
 \section{Tight-Binding Model}
 まず初めにTight-Binding Modelを、孤立原子における波動関数から始めてきちんと定義する。以下では簡単のため、結晶を構成する原子は一種類のみとし、また考える孤立原子の原子軌道は一種類のみとするが、これらの拡張はほとんど自明である（添え字を適当につけなおせばよい）。
 
-考える孤立原子の位置を$\vb*{x}_i$、原子軌道の波動関数を$\phi(\vb*{x}-\vb*{x}_i)$と書き、対応する状態ベクトルを$\ket*{i}$とかく。$i$番目の原子による電子の感じるポテンシャルを$V_i$とすれば、$\vb*{x}_i$は次のようなハミルトニアン$H_i$の固有状態である。
+考える孤立原子の位置を$\vec{x}_i$、原子軌道の波動関数を$\phi(\vec{x}-\vec{x}_i)$と書き、対応する状態ベクトルを$\ket*{i}$とかく。$i$番目の原子による電子の感じるポテンシャルを$V_i$とすれば、$\vec{x}_i$は次のようなハミルトニアン$H_i$の固有状態である。
 \begin{align}
-	H_i = \frac{p^2}{2m} + V_i(\vb*{x}) = -\frac{\hbar^2}{2m}\nabla^2 + V_i(\vb*{x})
+	H_i = \frac{p^2}{2m} + V_i(\vec{x}) = -\frac{\hbar^2}{2m}\nabla^2 + V_i(\vec{x})
 \end{align}
 したがって次が成り立つ。
 \begin{align}
@@ -28,7 +30,7 @@
 ここで$\varepsilon$は孤立原子における原子軌道の固有エネルギーである。
 結晶における全ハミルトニアンは、全原子のポテンシャルを含めたハミルトニアンで\footnote{正確には全原子のポテンシャルを足し合わせるだけでは不十分で、電子間のクーロン相互作用を考慮する必要がある。}
 \begin{align}
-	H = \frac{p^2}{2m} + \sum_i V_i(\vb*{x}) \label{eq:Hamiltonian}
+	H = \frac{p^2}{2m} + \sum_i V_i(\vec{x}) \label{eq:Hamiltonian}
 \end{align}
 となる。究極的な目標はこのハミルトニアンの固有状態を求めることである。
 
@@ -38,7 +40,7 @@ Tight-Binding modelにおいては、原子軌道が強く局在していると�
 		\braket{i}{j} =  \delta_{ij}
 	\end{align}
 	\item 各原子の波動関数$\phi_i, \phi_j$や原子のポテンシャル$V_k$は、それぞれ原子$i,j,k$の十分近くでのみ非ゼロの値を持つ。したがって、次のような$V_k$の行列要素は、原子$i,j,k$が十分近い時のみ有限の値を持つ。\begin{align}
-		\matrixel{i}{V_k}{j} = \int \phi_i^*(\vb*{x}) V_k(\vb*{x}) \phi_j(\vb*{x}) \dd[3]{x}
+		\matrixel{i}{V_k}{j} = \int \phi_i^*(\vec{x}) V_k(\vec{x}) \phi_j(\vec{x}) \dd[3]{x}
 	\end{align}
 \end{enumerate}
 このとき、ハミルトニアン$H$の行列要素$\matrixel{i}{H}{j}$は原子$i,j$が十分近いときのみ有限の値を持つ。この値を$t_{ij}$と置けば、ハミルトニアンは
@@ -52,18 +54,59 @@ Tight-Binding modelにおいては、原子軌道が強く局在していると�
 と表すことができる。これが通常のTight-Binding Modelである。
 
 \section{Peierls位相}
-前節で定義したTight-Binding Modelに対し、ベクトルポテンシャル$\vb*{A}$の効果を取り入れることを考える。すなわち、ハミルトニアン（式\eqref{eq:Hamiltonian}）に対して$\vb*{p}$を$\vb*{p}-\frac{e}{c}\vb*{A}$に置き換えたとき、どのように行列要素$t_{ij}$が変化するかを考える。ベクトルポテンシャルがあるときの行列要素$\matrixel{i}{H}{j}$を$\ttilde_{ij}$と書くことにすると、
+前節で定義したTight-Binding Modelに対し、ベクトルポテンシャル$\vec{A}$の効果を取り入れることを考える。すなわち、ハミルトニアン（式\eqref{eq:Hamiltonian}）に対して$\vec{p}$を$\vec{p}-\frac{e}{c}\vec{A}$に置き換えたとき、どのように行列要素$t_{ij}$が変化するかを考える。ベクトルポテンシャルがあるときの行列要素$\matrixel{i}{H}{j}$は、
 \begin{align}
-	\ttilde_{ij} &= \int \phi^*_i H \phi_j \dd[3]x \\
-	&= \int \phi^*_i \qty[\frac{1}{2m}\qty(\vb*{p}-\frac{e}{c}\vb*{A})^2 + \sum_k V_k] \phi_j \dd[3]x
+	\matrixelement{i}{H}{j} &= \int \phi^*_i H \phi_j \dd[3]x \\
+	&= \int \phi^*_i \qty[\frac{1}{2m}\qty(\vec{p}-\frac{e}{c}\vec{A})^2 + \sum_k V_k] \phi_j \dd[3]x \label{eq:trasfer_with_mag}
 \end{align}
-となる。
-これを書き換えることで
+となる。これを書き換えることでベクトルポテンシャルの効果を簡潔に表現したい。
 
+以下では、前節で述べたTight-Binding Modelの仮定に加えて、さらに次のような仮定をする。
+\begin{enumerate}
+	\item 式\eqref{eq:trasfer_with_mag}の被積分関数は十分局在しており、積分範囲をある領域$S_{ij}$に制限して良い近似が得られる。
+	\item 磁場は$\phi_i, \phi_j, S_{ij}$などが局在している面積に比べて十分小さい。すなわち、これらの局在する面積を$D$として、$eBD/\hbar c \ll 1$が成り立つ。
+	% \item ベクトルポテンシャル$A$の空間的な変化は、$\phi_i, \phi_j, S_{ij}$の局在している長さに比べて十分にゆっくりである。
+\end{enumerate}
 
+Peierls位相を導出するには、適切にゲージを固定する必要がある。すなわち、$\phi_i$の位相を適切にとる必要がある。ここでは、磁場のない時の波動関数$\phi_i$に対して、次のような$\tphi_i$を取ることにする。
+\begin{align}
+	\tphi_i(\vec{x}) &= \exp(\frac{ie}{\hbar c}\int_{\vec{x}_i}^{\vec{x}}\dd\vec{x}'A(\vec{x}')) 
+	\phi_i(\vec{x})
+\end{align}
+ここでexpの指数の中にある積分の積分経路としては、$\vec{x}$と$\vec{x}_i$を結ぶ経路で、$\phi_i(\vec{x})$が非ゼロであるような領域に含まれているものを適当に選ぶ。この積分がこの下で経路によらないとみなせるための条件が上記の仮定2である。
+
+このとき、
+\begin{align}
+	\nabla \tphi_i(\vec{x}) &= \exp(\frac{ie}{\hbar c}\int_{\vec{x}_i}^{\vec{x}}\dd\vec{x}'A(\vec{x}')) \qty(\nabla + \frac{ie}{\hbar c}A(\vec{x})) \phi_i(\vec{x})
+\end{align}
+となる。本来は、$\vec{x}$の位置によって積分経路が変わると、それに起因して、$ieBD/\hbar c$程度の余分な微分項が生じるが、すでに述べているようにここではそれが無視できる（仮定2）。
+
+このとき、行列要素$\ttilde_{ij} = \matrixelement{\tilde{i}}{H}{\tilde{j}}$は
+\begin{align}
+	\ttilde_{ij} &= \int\dd[3]x  \tphi^*_i \qty[\frac{1}{2m}\qty(\vec{p}-\frac{e}{c}\vec{A})^2 + \sum_k V_k] \tphi_j \\
+	&= \int_{S_{ij}}\dd[3]x  \phi^*_i \exp(\frac{ie}{\hbar c}\int_{\vec{x}_j}^{\vec{x_i}}\dd\vec{x}'A(\vec{x}')) \phi^*_i \qty[\frac{1}{2m}\vec{p}^2 + \sum_k V_k] \phi_j \\
+	&= e^{i\theta_{ij}} t_{ij}　\\
+	\theta_{ij} &= \frac{e}{\hbar c}\int_{\vec{x}_j}^{\vec{x_i}}\dd\vec{x}'A(\vec{x}')
+\end{align}
+ただし、一行目から二行目の変形では、積分領域が$S_{ij}$に制限できること（仮定1）、そしてその下ではexpの指数に現れる積分が経路に依らずに定義できること（仮定2）を用いている。
+この形は、位相因子がホッピング$t$の中に現れることを示しており、この位相因子がPeierls位相である。
+
+% ここで$S_{ij}$は原子$\phi_i,\phi_j$がともに無視できない非ゼロの値をとるような領域で、十分に局在しているものと仮定する。このとき、$S_{ij}$内の位置$\vec{x}$に対し、次のような量$\theta_{ij}(\vec{x})$
+% % 原子$i$から$j$へ向かう経路で、その経路の全域が$S_{ij}$に含まれているもの$\vec{R}(\tau)$($\vec{R}(0)=\vec{x}_i, \vec{R}(1)=\vec{x}_j$)に対し、次のような量を定義できる。
+% \begin{align}
+% 	\theta_{ij}(\vec{x}) &= \int_{\vec{x_i}}^{\vec{x}} \dd\vec{x}' \vdot \frac{e}{\hbar c}\vec{A}(\vec{x}')
+% \end{align}
+% ここで積分経路は$S_{ij}$の中で$x_i$と$\vec{x}$をつなぐものを適当に選ぶ。このとき、$\theta_{ij}(\vec{x})$が経路によらず定まりwell-definedとなるための条件が上記の仮定2である。
+
+最後に、上記でたびたび用いていた仮定2が、結晶中の電子については十分に現実的であることを大雑把な計算で確認しておこう。結晶中では、$e \sim \SI{1e-19}{C}, D \sim \SI{1e-18}{m^2}, \hbar\sim\SI{1e-34}{Js}$程度であることから、$eBD/\hbar c\ll 1$であるための条件は、
+\begin{align}
+	B \ll \SI{1e3}{T}
+\end{align}
+となる。これは、例えば\cite{wiki_magnitude}を見ると十分に現実的であることがわかる。
 
 \begin{thebibliography}{99}
 	\bibitem{NagaiNote} \url{http://park.itc.u-tokyo.ac.jp/kato-yusuke-lab/nagai/note_110711_mag.pdf}
+	\bibitem{wiki_magnitude} \url{https://en.wikipedia.org/wiki/Orders_of_magnitude_(magnetic_field)}
 \end{thebibliography}
 
 
