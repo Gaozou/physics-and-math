@@ -1,0 +1,136 @@
+\documentclass[uplatex,dvipdfmx, a4j]{jsarticle}
+
+\input{"preamble.tex"}
+
+\title{誤差演算子の性質に関する補足}
+\author{ガオゾウ}
+
+\newcommand{\ope}[1]{\hat{#1}}
+\newcommand{\proj}{\ope{P}}
+\newcommand{\hc}[1]{{\ope{#1}}^\dagger}
+\newcommand{\expms}[1]{\expval{#1}_{\mathrm{measure}}}
+
+\begin{document}
+\maketitle
+\section{概要}
+沙川・上田の「量子測定と量子制御」の教科書を読んでいて、2.2.1.2節 誤差のない測定の条件 の証明の行間でかなり詰まって辛かったのでメモっておく。
+
+\section{準備}
+量子測定に伴う誤差について考えたい。間接測定を考える。すなわち、測定対象の系Sに、プローブ系Pをくっつけて相互作用させ、時間発展させる。その後、プローブPのある物理量を測定し、その結果からSに関する情報を得ることを考えたい。
+
+Sの測定したい物理量を$\ope{A}$とし、そのスペクトル分解を
+\begin{align}
+	\ope{A} &= \sum_k \alpha_k\proj_k
+\end{align}
+と書く。ここで$\proj_k$は固有値$\alpha_k$に対応する固有空間への射影演算子である。$k\neq l$のとき$\alpha_k\neq\alpha_l$として一般性を失わない。
+
+同様に、プローブについて測定する物理量を$\ope{R}$とし、そのスペクトル分解を
+\begin{align}
+	\ope{R} &= \sum_k r_k\proj_k^R
+\end{align}
+
+プローブPをSと相互作用させ時間発展させたときの対応するユニタリ演算子を$\ope{U}$と書く。
+
+このとき、間接測定の結果得られる期待値を$\expms{\ope{A}}$と書くことにすると、
+\begin{align}
+	\expms{\ope{A}} &= \tr_{SP}[\hc{U}\ope{R}\ope{U}\ope{\rho}\otimes\ope{\rho_P}] 
+\end{align}
+ここで、
+\begin{align}
+	\ope{E} &= \sum_k r_k \ope{E}_k = \tr_P[\hc{U}\ope{R}\ope{U}\ope{\rho_P}] \\
+	\ope{E}_k &= \tr_P[\hc{U}\proj_k^R\ope{U}\ope{\rho}_P]
+\end{align}
+とすると、
+\begin{align}
+	\expms{\ope{A}} &= \tr[\ope{E}\ope{\rho}]
+\end{align}
+と書ける。ここで、$\tr$はSに関するトレースを表す。以下同様である。
+
+一方で、系Sの物理量$\ope{A}$に関する真の期待値は、
+\begin{align}
+	\expval{\ope{A}} &= \tr[\ope{A}\ope{\rho}]
+\end{align}
+と書ける。これらの間の差は、
+\begin{align}
+	\expms{\ope{A}} - \expval{\ope{A}} &= \tr_{SP}[\ope{N}\rho\otimes\rho_P]
+\end{align}
+と書ける。ここで、$\ope{N}$は次のように定義される。
+\begin{align}
+	\ope{N} &= \hc{U}\ope{R}\ope{U} - \ope{A}
+\end{align}
+右辺の$\ope{A}$は、本来系Sのみに作用する演算子であるが、ここではそれを合成系SPまで拡張した演算子を表している。すなわち、$\ope{A}\otimes\ope{1}_P$。
+
+\section{証明する定理}
+任意の$\ope{\rho}$に対して$\expval{\ope{N}^2}=0$であるための必要十分条件は、$r_k = \alpha_k$かつ$\ope{E}_k = \ope{P}_k$（すなわち誤差のない測定であること）である。ただし、$k$の並べ替えの任意性は除く。
+
+すなわち、$\expval{\ope{N}^2}$が0かどうかを見ると、今考えている間接測定$(P, \ope{U}, \ope{R})$が誤差のない測定かどうかがわかることを述べているのがこの定理である。
+
+\section{証明}
+簡単な計算によって、
+\begin{align}
+	\expval{\ope{N}^2} &= \sum_k \tr[(r_k\ope(I)-\ope{A})\ope{E}_k(r_k\ope(I)-\ope{A})\ope{\rho}]
+\end{align}
+がわかる。ところでこの表式をよく見ると、和の各項は演算子$(r_k\ope(I)-\ope{A})\ope{E}_k(r_k\ope(I)-\ope{A})$の期待値をとっているが、この演算子は非負となっている。なぜなら、$\ope{E}_k$は非負である（教科書(2.45)式などを参照）ことに加えて、それを挟む演算子はエルミートだからである。したがって、これら非負の演算子の期待値の和が0になるためには、和の各項がすべて0にならなくてはならない。すなわち、任意の$k$について、
+\begin{align}
+	\tr[(r_k\ope(I)-\ope{A})\ope{E}_k(r_k\ope(I)-\ope{A})\ope{\rho}] &= 0
+\end{align}
+が成り立つことが$\expval{\ope{N}^2}=0$の必要十分条件である。したがって、これが任意の$\ope{\rho}$について成り立つ為の必要十分条件は、
+\begin{align}
+	(r_k\ope(I)-\ope{A})\ope{E}_k(r_k\ope(I)-\ope{A}) &= 0 \label{eq:condition}
+\end{align}
+となる。この条件に対して、$r_k = \alpha_k$かつ$\ope{E}_k = \ope{P}_k$が十分条件になっていることは直ちにわかる。
+
+逆に、式\eqref{eq:condition}がある$k$に対して成立していると仮定する。このとき、式\eqref{eq:condition}の両側から$\proj_l$をかけると、
+\begin{align}
+	(r_k-\alpha_l)^2 \proj_l\ope{E}_k\proj_l &= 0
+\end{align}
+が任意の$l$について成立することがわかる。このとき、$\ope{E}_k\neq 0$とすると、少なくとも一つの$l$について$\proj_l\ope{E}_k\proj_l\neq 0$となる（後述の補題1）。そのような$l$に対しては、$r_k = \alpha_l$でなくてはならない。そのような$l$を一つ選び、それが$k$になるように、適当にインデックスを入れ替える。すなわち、$r_k = \alpha_k$。
+
+今、$k\neq l$の時$\alpha_k \neq \alpha_l$を仮定していたから、$k\neq l$の時$r_k \neq \alpha_l$となり、したがって$k\neq l$ならば$\proj_l\ope{E}_k\proj_l = 0$でなくてはならない。このとき、$\ope{E}_k$のサポート\footnote{非ゼロの固有値を持つ固有ベクトルで張られる部分空間のこと。}は、$\proj_k$のサポートに含まれている（後述の補題2）。
+
+以上のことはすべての$k$について成り立つ。したがって、完全性条件$\sum_k\ope{E}_k = 1, \sum_k\proj_k = 1$より、$\ope{E}_k = \proj_k$がわかる。$r_k = \alpha_k$も示したので、これで証明が完了した。
+
+以下、途中で用いた補題を証明する。
+\subsection{補題1}
+\subsubsection{補題1の主張}
+\begin{align}
+	(r_k-\alpha_l)^2 \proj_l\ope{E}_k\proj_l &= 0
+\end{align}
+が成り立ち、$\ope{E}_k\neq 0$のとき、少なくとも一つの$l$について$\proj_l\ope{E}_k\proj_l\neq 0$となる。
+\subsubsection{補題1の証明}
+対偶を示す。すなわち、すべての$l$について$\proj_l\ope{E}_k\proj_l = 0$の時、$\ope{E}_k = 0$となることを示す。証明は、$\ope{E}_k$が非負のエルミート演算子であることから、$\ope{E}_k$のすべての固有値が非負であるため、$\ope{E}_k$のトレースが0であることを示せば十分である。
+
+$\proj_l$で射影される空間の基底を$\{\ket{l,i}\}_i$と書くと、$\proj_l\ket{l,i} = \ket{l,i}$であり、
+\begin{align}
+	\tr[\ope{E}_k] &= \sum_{l,i} \matrixel*{l,i}{\ope{E}_k}{l,i} \\
+	&= \sum_{l,i} \matrixel*{l,i}{\proj_l\ope{E}_k\proj_l}{l,i} = 0
+\end{align}
+したがって、上で述べたことより$\ope{E}_k=0$が示された。
+
+\subsection{補題2}
+\subsubsection{補題2の主張}
+$k\neq l$ならば$\proj_l\ope{E}_k\proj_l = 0$が成り立つとき、$\ope{E}_k$のサポートは$\proj_k$のサポートに含まれる。
+\subsubsection{補題2の証明}
+$\ope{Q} = 1-\proj_k = \sum_{j\neq k} \proj_j$とおく。
+
+まず、$\ope{Q}\ope{E}_k\ope{Q} = 0$である。なぜなら、$\ope{Q}\ope{E}_k\ope{Q}$は非負の演算子であるから、補題1の証明と同様にトレースが0であることを示せば十分であるが、これは$\proj_l\ope{E}_k\proj_l = 0$より明らかである。
+
+示したいことは、$\ope{E}_k\ope{Q}=0$である。$\ope{1} = \proj_k + \ope{Q}$と、今示した$\ope{Q}\ope{E}_k\ope{Q} = 0$より、 $\proj_k \ope{E}_k \ope{Q}=0$を示せばよい。以下これを背理法で示す。
+
+$\proj_k \ope{E}_k \ope{Q}\neq0$を仮定する。任意の量子状態$\ket{\psi}$を考える。$\ope{E}_k$は非負であるから、次が成り立つ。
+\begin{align}
+	0 &\le \expval*{\ope{E}_k}{\psi} \\
+	  &= \matrixelement*{\psi}{(\proj_k + \ope{Q})\ope{E}_k(\proj_k + \ope{Q})}{\psi} \\
+	  &= \matrixelement*{P}{\ope{E}_k}{P} + \matrixelement*{P}{\ope{E}_k}{Q} + \matrixelement*{Q}{\ope{E}_k}{P} \label{eq:inequality}
+\end{align}
+ただし、
+\begin{align}
+	\ket{P} &= \proj_k \ket{\psi} \\
+	\ket{Q} &= \ope{Q} \ket{\psi} = (1-\proj_k) \ket{\psi}
+\end{align}
+である。$\ket{P}$と$\ket{Q}$は直交しており、また$\ket{\psi}$は任意であったから、$\ket{P}$と$\ket{Q}$は独立に動かせる。したがって、不等式\eqref{eq:inequality}は、任意の$\ket{P},\ket{Q}$について成り立たなくてはならない。
+
+今、背理法の仮定より、$\proj_k \ope{E}_k \ope{Q}\neq0$であり、したがって、$\ope{Q}\ope{E}_k\proj_k\neq0$である。よって、うまく$\ket{P},\ket{Q}$を選べば、$\matrixelement*{P}{\ope{E}_k}{Q} + \matrixelement*{Q}{\ope{E}_k}{P}$は非ゼロに出来る。さらにそのような$\ket{P},\ket{Q}$の組に対して、$\ket{Q}$のみを適切にスカラー倍すれば、$\matrixelement*{P}{\ope{E}_k}{Q} + \matrixelement*{Q}{\ope{E}_k}{P}$を負にしたうえで、その絶対値をいくらでも大きくすることができる。よって、不等式\eqref{eq:inequality}は、ある$\ket{P},\ket{Q}$について成り立たないことがわかる。これは矛盾である。
+
+以上より、背理法から$\proj_k \ope{E}_k \ope{Q}=0$であることがわかった。
+\end{document}
