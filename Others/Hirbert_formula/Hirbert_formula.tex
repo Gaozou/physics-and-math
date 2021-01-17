@@ -1,14 +1,20 @@
 \documentclass[uplatex,dvipdfmx]{jsarticle}
 
 \input{"preamble.tex"}
+\usepackage{ulem}
+\usepackage{color}
+% \renewcommand{\sout}[1]{\textcolor{red}{\sout{\textcolor{black}{#1}}}}
+\newcommand{\Erase}[1]{\textcolor{red}{\sout{\textcolor{black}{#1}}}}
+\newcommand{\Add}[1]{\textcolor{red}{#1}}
 
-\title{ヒルベルトの公式に関するメモ}
+
+\title{\Erase{ヒルベルトの公式}\Add{Sokhotski–Plemelj formula}に関するメモ}
 \author{ガオゾウ}
 
 \begin{document}
 \maketitle
 \section{概要}
-ヒルベルトの公式
+\Erase{ヒルベルトの公式}\Add{Sokhotski–Plemelj formula}\footnote{"delta function principal value"でググったら出た。2021/01/17訂正。}
 \begin{equation}
 	\lim_{\eta \to +0}\frac{1}{\omega \pm i\eta} = \pv{\frac{1}{\omega}} \mp i\pi \delta(\omega) \label{eq:formula}
 \end{equation}
@@ -23,7 +29,7 @@
 \begin{equation}
 	\int_{-\infty}^{\infty} \dd{\omega} \pv{ \frac{\phi(\omega)}{\omega}}
 \end{equation}
-ここで$\phi(\omega)$はテスト関数で、複素平面全体で正則であり、また$|z|\to \infty$の時$\phi(z)$は十分速く$0$に収束するものとする。このとき、図\ref{fig:contour}のように積分経路$C_1, C_2(赤色円の上半分), C_3(赤色円の下半分)$をとることにすると、
+ここで$\phi(\omega)$はテスト関数で、複素平面全体で正則であ\Erase{り、また$|z|\to \infty$の時$\phi(z)$は十分速く$0$に収束す}るものとする。このとき、図\ref{fig:contour}のように積分経路$C_1, C_2(赤色円の上半分), C_3(赤色円の下半分)$をとることにする。\Add{ここで$C_1$の外側の半円部分は不要である。}
 \begin{figure}
 	\centering
 	\includegraphics{contour.png}
